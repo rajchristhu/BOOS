@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "760747557075",
+    "project_id": "boos-8c0e0",
+    "storage_bucket": "boos-8c0e0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:760747557075:android:3b52f9afad8fb99de09426",
+        "android_client_info": {
+          "package_name": "com.example.boos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "760747557075-nhqgo5j37prkf2jnut3si6501e2cc76h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLHJbtEhtRsHcnbYY9tNGGWQjx70FTJMY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "760747557075-nhqgo5j37prkf2jnut3si6501e2cc76h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
