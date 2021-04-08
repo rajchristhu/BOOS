@@ -27,7 +27,7 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsFloating">false</item>
     </style>
-    <style name="BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
+    <style name="BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
         <item name="itemBackground">@drawable/background_bottom_nav_item</item>
         <item name="itemIconTint">@drawable/color_bottom_nav_item</item>
         <item name="itemTextColor">@drawable/color_bottom_nav_item</item>
