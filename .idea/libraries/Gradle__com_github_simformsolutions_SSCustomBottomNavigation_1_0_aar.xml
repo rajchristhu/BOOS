@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.simformsolutions:SSCustomBottomNavigation:1.0@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5fbfde650488e05a66d0aa2cbfbe7be9/jetified-SSCustomBottomNavigation-1.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5fbfde650488e05a66d0aa2cbfbe7be9/jetified-SSCustomBottomNavigation-1.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5fbfde650488e05a66d0aa2cbfbe7be9/jetified-SSCustomBottomNavigation-1.0/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.simformsolutions/SSCustomBottomNavigation/1.0/14f9b5b0926b40b04f0c577eac4860a8f20b76fb/SSCustomBottomNavigation-1.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

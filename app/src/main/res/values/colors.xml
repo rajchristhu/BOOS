@@ -1,10 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+
+        <color name="colorPrimary">#e73827</color>
+        <color name="colorPrimaryDark">#56ab2f</color>
+        <color name="colorAccent">#e73827</color>
+        <color name="colorVal">#0074AD</color>
+        <color name="iconcol">#e73827</color>
+        <color name="background">#FFFAFA</color>
+        <color name="colorVals" tools:ignore="MissingDefaultResource">#0074AD</color>
+        <color name="white">#FFFAFA</color>
+        <color name="black">#424242</color>
+        <color name="tomato">#f85032</color>
+        <color name="tomatos">#f85032</color>
+        <color name="apple">#e73827</color>
+        <color name="gray">#E0E0E0</color>
+        <color name="grays">#9E9E9E</color>
+        <color name="lemon">#ffff9f</color>
+        <!--    D34D4A-->
+        <color name="default_text_color">#3e3e3d</color>
+        <color name="default_text_color_checked">#ffffff</color>
+
+        <color name="default_segment_color">#f8f8f8</color>
+        <color name="default_segment_color_checked">#DC5145</color>
+
+        <color name="default_ripple_color">#e4e4e4</color>
+        <color name="default_ripple_color_checked">#c695a4</color>
+
+        <color name="default_border_color">#e4e4e4</color>
+
+
+    <color name="color_white">#FFFFFF</color>
+    <color name="color_gray">#D3D3D3</color>
+    <color name="color_black">#000000</color>
+
+    <color name="color_home_bg">#9A979C</color>
+    <color name="color_favorite_bg">#444145</color>
+    <color name="color_chat_bg">#21FF06</color>
+    <color name="color_notification_bg">#80007F</color>
+    <color name="color_profile_bg">#0D5FFF</color>
+        <!--    2E323E-->
+
 </resources>

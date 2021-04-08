@@ -1,0 +1,19 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.smhdk:KM-Recyclerview-Sticky-Header:v1.0.0@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/03c233b2d064b902fef609eb101543f8/jetified-KM-Recyclerview-Sticky-Header-v1.0.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/03c233b2d064b902fef609eb101543f8/jetified-KM-Recyclerview-Sticky-Header-v1.0.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/03c233b2d064b902fef609eb101543f8/jetified-KM-Recyclerview-Sticky-Header-v1.0.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6403ce7b7cd1cca2c1ece00ec9cbdea5/jetified-KM-Recyclerview-Sticky-Header-v1.0.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6403ce7b7cd1cca2c1ece00ec9cbdea5/jetified-KM-Recyclerview-Sticky-Header-v1.0.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6403ce7b7cd1cca2c1ece00ec9cbdea5/jetified-KM-Recyclerview-Sticky-Header-v1.0.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8ec530742c7d0ef80d1b5ff81bf4f641/jetified-KM-Recyclerview-Sticky-Header-v1.0.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8ec530742c7d0ef80d1b5ff81bf4f641/jetified-KM-Recyclerview-Sticky-Header-v1.0.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8ec530742c7d0ef80d1b5ff81bf4f641/jetified-KM-Recyclerview-Sticky-Header-v1.0.0/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.smhdk/KM-Recyclerview-Sticky-Header/v1.0.0/2a719749539a41956e1f60c3e0b88211cb05262c/KM-Recyclerview-Sticky-Header-v1.0.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
