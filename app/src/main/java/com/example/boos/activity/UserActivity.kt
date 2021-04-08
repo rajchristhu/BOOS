@@ -9,72 +9,27 @@ import com.simform.custombottomnavigation.SSCustomBottomNavigation
 import kotlinx.android.synthetic.main.activity_user.*
 
 class UserActivity : AppCompatActivity() {
+    private var numVisibleChildren = 4
+
     companion object {
-        private const val ID_HOME = 1
-        private const val ID_EXPLORE = 2
-        private const val ID_MESSAGE = 3
-        private const val ID_NOTIFICATION = 4
-        private const val ID_ACCOUNT = 5
+        private const val MAX_MENU_ITEMS = 5
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user)
-        bottomNavigation.apply {
+        initMenuItemsVisibility()
 
-            add(SSCustomBottomNavigation.Model(ID_HOME, R.drawable.ic_launcher_background, "Home"))
-            add(SSCustomBottomNavigation.Model(ID_EXPLORE, R.drawable.ic_launcher_background, "Favorite"))
-            add(SSCustomBottomNavigation.Model(ID_MESSAGE, R.drawable.ic_launcher_background, "Chat"))
-            add(
-                SSCustomBottomNavigation.Model(
-                    ID_NOTIFICATION,
-                    R.drawable.ic_launcher_background,
-                    "Notification"
-                )
-            )
-            add(SSCustomBottomNavigation.Model(ID_ACCOUNT, R.drawable.ic_launcher_background, "Profile"))
+    }
 
-            setCount(ID_NOTIFICATION, "10")
-
-            setOnShowListener {
-                val name = when (it.id) {
-                    ID_HOME -> "Home"
-                    ID_EXPLORE -> "Explore"
-                    ID_MESSAGE -> "Message"
-                    ID_NOTIFICATION -> "Notification"
-                    ID_ACCOUNT -> "Account"
-                    else -> ""
-                }
-
-                val bgColor = when (it.id) {
-                    ID_HOME -> ContextCompat.getColor(context, R.color.color_home_bg)
-                    ID_EXPLORE -> ContextCompat.getColor(context, R.color.color_favorite_bg)
-                    ID_MESSAGE -> ContextCompat.getColor(context, R.color.color_chat_bg)
-                    ID_NOTIFICATION -> ContextCompat.getColor(context, R.color.color_notification_bg)
-                    ID_ACCOUNT -> ContextCompat.getColor(context, R.color.color_profile_bg)
-                    else -> ContextCompat.getColor(context, R.color.colorPrimary)
-                }
-//
-//                tv_selected.text = getString(R.string.main_page_selected, name)
-//                lnrLayout.setBackgroundColor(bgColor)
-            }
-
-            setOnClickMenuListener {
-                val name = when (it.id) {
-                    ID_HOME -> "HOME"
-                    ID_EXPLORE -> "EXPLORE"
-                    ID_MESSAGE -> "MESSAGE"
-                    ID_NOTIFICATION -> "NOTIFICATION"
-                    ID_ACCOUNT -> "ACCOUNT"
-                    else -> ""
-                }
-            }
-
-            setOnReselectListener {
-                Toast.makeText(context, "item ${it.id} is reselected.", Toast.LENGTH_LONG).show()
-            }
-
+    private fun initMenuItemsVisibility() {
+        for (i in 0 until bottomNavigationView.menu.size()) {
+            bottomNavigationView.menu.getItem(i).isVisible = i < numVisibleChildren
         }
     }
+
+
+    fun dpToPx(dp: Float): Float = resources.displayMetrics.density * dp
+    fun pxToDp(px: Float): Float = px / resources.displayMetrics.density
 }

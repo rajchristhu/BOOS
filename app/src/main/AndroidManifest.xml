@@ -39,7 +39,8 @@
         <activity android:name=".start.AdminActivity" />
         <activity android:name=".start.OwnerTabActivity" />
         <activity android:name=".start.DeleveryBoy" />
-        <activity android:name=".activity.UserActivity" />
+        <activity android:name=".activity.UserActivity"
+            />
         <activity android:name=".MainActivity" />
         <activity android:name=".start.SplashActivity">
             <intent-filter>
