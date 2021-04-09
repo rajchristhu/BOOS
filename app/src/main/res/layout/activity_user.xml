@@ -199,6 +199,15 @@
 <!--        app:morphItemRadius="64dp"-->
 <!--        app:morphVerticalOffset="16dp" />-->
 
+    <FrameLayout
+        android:id="@+id/fragment2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
     <com.etebarian.meowbottomnavigation.MeowBottomNavigation
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -209,9 +218,9 @@
         app:mbn_backgroundBottomColor="@color/colorPrimaryDark"
         app:mbn_countBackgroundColor="@color/white"
         app:mbn_countTextColor="#ffffff"
-        app:mbn_defaultIconColor="#ffff00"
+        app:mbn_defaultIconColor="@color/white"
         app:mbn_rippleColor="#2f424242"
-        app:mbn_selectedIconColor="@color/white"
+        app:mbn_selectedIconColor="#ffff00"
         app:mbn_shadowColor="#1f212121" />
 
 

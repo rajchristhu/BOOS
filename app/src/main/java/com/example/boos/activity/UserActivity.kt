@@ -6,8 +6,10 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.get
+import androidx.fragment.app.Fragment
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 import com.example.boos.R
+import com.example.boos.fragment.HomeFragment
 import com.github.kwasow.bottomnavigationcircles.BottomNavigationCircles
 import com.simform.custombottomnavigation.SSCustomBottomNavigation
 import kotlinx.android.synthetic.main.activity_user.*
@@ -41,6 +43,7 @@ class UserActivity : AppCompatActivity() {
 
         bottomNavigation.setOnClickMenuListener {
         }
+        changeFragment(HomeFragment(),"home")
     }
 
 
@@ -48,4 +51,13 @@ class UserActivity : AppCompatActivity() {
 
     fun dpToPx(dp: Float): Float = resources.displayMetrics.density * dp
     fun pxToDp(px: Float): Float = px / resources.displayMetrics.density
+    private fun changeFragment(targetFragment: Fragment, tag: String) {
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragment2, targetFragment, tag)
+            .addToBackStack(null)
+            //            .setTransitionStyle(FragmentTransaction.TRANSIT_NONE)
+            .commit()
+    }
+
 }
