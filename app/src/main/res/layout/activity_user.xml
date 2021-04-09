@@ -7,14 +7,12 @@
     android:background="@color/white"
     tools:context=".activity.UserActivity">
 
-    <androidx.cardview.widget.CardView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_dialog"
         android:elevation="10dp"
-        app:cardCornerRadius="19dp"
-        app:cardElevation="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -23,59 +21,73 @@
             android:id="@+id/main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimaryDark"
+            android:background="@drawable/rounded_dialog"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:context=".basic_ui.MarketActivity">
 
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="25dp"
                 android:layout_height="20dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginLeft="24dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/locationtext"
                 app:srcCompat="@drawable/marker" />
 
-            <ImageView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/menuss"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="24dp"
-                android:layout_marginRight="24dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:innerRadius="0dp"
+                android:shape="ring"
+                app:cardCornerRadius="75dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/menud" />
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/profileimage"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/profilepng"
+                    android:scaleType="centerCrop" />
+            </androidx.cardview.widget.CardView>
 
             <TextView
                 android:id="@+id/locationtext"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="24dp"
                 android:fontFamily="@font/open_sans_semibold"
-                android:text="-----"
+                android:text="ponnaiyan chetti st,thiruthuraipoondi,thiruvarur"
                 android:textColor="@color/white"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toTopOf="@+id/searchone"
                 app:layout_constraintEnd_toStartOf="@+id/menuss"
                 app:layout_constraintStart_toEndOf="@+id/imageView"
-                app:layout_constraintTop_toTopOf="@+id/imageView" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/searchone"
                 android:layout_width="0dp"
                 android:layout_height="45dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="24dp"
-                android:layout_marginBottom="24dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="12dp"
                 app:cardCornerRadius="18dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/menuss">
+                app:layout_constraintEnd_toStartOf="@+id/menuss"
+                app:layout_constraintStart_toEndOf="@+id/imageView"
+                app:layout_constraintTop_toBottomOf="@+id/locationtext">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -161,7 +173,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 <!--    <com.tbuonomo.morphbottomnavigation.MorphBottomNavigationView-->
 <!--        android:id="@+id/bottom_navigation"-->
@@ -187,27 +199,57 @@
 <!--        app:morphItemRadius="64dp"-->
 <!--        app:morphVerticalOffset="16dp" />-->
 
-
-    <com.simform.custombottomnavigation.SSCustomBottomNavigation
-        android:id="@+id/bottomNavigation"
+    <com.etebarian.meowbottomnavigation.MeowBottomNavigation
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_marginBottom="8dp"
+        android:id="@+id/bottomNavigation"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:ss_backgroundBottomColor="#ffffff"
-        app:ss_circleColor="#ff6f00"
-        app:ss_countBackgroundColor="#ff6f00"
-        app:ss_countTextColor="#ffffff"
-        app:ss_defaultIconColor="#6200EE"
-        app:ss_iconTextColor="#6200EE"
-        app:ss_iconTextSize="14sp"
-        app:ss_rippleColor="#2f424242"
-        app:ss_selectedIconColor="#ff6f00"
-        app:ss_selectedIconTextColor="#ff6f00"
-        app:ss_shadowColor="#1f212121"
-        app:ss_waveHeight="7" />
+        app:mbn_backgroundBottomColor="@color/colorPrimaryDark"
+        app:mbn_countBackgroundColor="@color/white"
+        app:mbn_countTextColor="#ffffff"
+        app:mbn_defaultIconColor="#ffff00"
+        app:mbn_rippleColor="#2f424242"
+        app:mbn_selectedIconColor="@color/white"
+        app:mbn_shadowColor="#1f212121" />
+
+
+<!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
+<!--        android:id="@+id/bottom_nav"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="56dp"-->
+<!--        android:layout_gravity="bottom"-->
+<!--        android:background="@color/white"-->
+<!--        app:elevation="12dp"-->
+<!--        app:itemIconSize="54dp"-->
+<!--        app:labelVisibilityMode="unlabeled"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:menu="@menu/menu_bottom_navigation"></com.google.android.material.bottomnavigation.BottomNavigationView>-->
+
+
+<!--    <com.simform.custombottomnavigation.SSCustomBottomNavigation-->
+<!--        android:id="@+id/bottomNavigation"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="bottom"-->
+<!--        android:layout_marginBottom="8dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:ss_backgroundBottomColor="#ffffff"-->
+<!--        app:ss_circleColor="#ff6f00"-->
+<!--        app:ss_countBackgroundColor="#ff6f00"-->
+<!--        app:ss_countTextColor="#ffffff"-->
+<!--        app:ss_defaultIconColor="#6200EE"-->
+<!--        app:ss_iconTextColor="#6200EE"-->
+<!--        app:ss_iconTextSize="14sp"-->
+<!--        app:ss_rippleColor="#2f424242"-->
+<!--        app:ss_selectedIconColor="#ff6f00"-->
+<!--        app:ss_selectedIconTextColor="#ff6f00"-->
+<!--        app:ss_shadowColor="#1f212121"-->
+<!--        app:ss_waveHeight="7" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

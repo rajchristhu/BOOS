@@ -1,11 +1,14 @@
 package com.example.boos.activity
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.get
+import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 import com.example.boos.R
+import com.github.kwasow.bottomnavigationcircles.BottomNavigationCircles
 import com.simform.custombottomnavigation.SSCustomBottomNavigation
 import kotlinx.android.synthetic.main.activity_user.*
 import org.jetbrains.anko.toast
@@ -25,64 +28,19 @@ class UserActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user)
+        val bottomNavigation = bottomNavigation
+        bottomNavigation.add(MeowBottomNavigation.Model(1, R.drawable.of))
+        bottomNavigation.add(MeowBottomNavigation.Model(2, R.drawable.track))
+        bottomNavigation.add(MeowBottomNavigation.Model(3, R.drawable.home))
+        bottomNavigation.add(MeowBottomNavigation.Model(4, R.drawable.cart))
+        bottomNavigation.add(MeowBottomNavigation.Model(5, R.drawable.history))
+        bottomNavigation.show(3)
 
-    bottomNavigation.apply {
-
-            add(SSCustomBottomNavigation.Model(ID_HOME, R.drawable.menud, "Home"))
-            add(SSCustomBottomNavigation.Model(ID_EXPLORE, R.drawable.menud, "Favorite"))
-            add(SSCustomBottomNavigation.Model(ID_MESSAGE, R.drawable.menud, "Chat"))
-            add(
-                SSCustomBottomNavigation.Model(
-                    ID_NOTIFICATION,
-                    R.drawable.menud,
-                    "Notification"
-                )
-            )
-            add(SSCustomBottomNavigation.Model(ID_ACCOUNT, R.drawable.menud, "Profile"))
-
-
-            setOnShowListener {
-                val name = when (it.id) {
-                    ID_HOME -> "Home"
-                    ID_EXPLORE -> "Explore"
-                    ID_MESSAGE -> "Message"
-                    ID_NOTIFICATION -> "Notification"
-                    ID_ACCOUNT -> "Account"
-                    else -> ""
-                }
-
-                val bgColor = when (it.id) {
-                    ID_HOME -> ContextCompat.getColor(this@UserActivity, R.color.color_home_bg)
-                    ID_EXPLORE -> ContextCompat.getColor(this@UserActivity, R.color.color_favorite_bg)
-                    ID_MESSAGE -> ContextCompat.getColor(this@UserActivity, R.color.color_chat_bg)
-                    ID_NOTIFICATION -> ContextCompat.getColor(this@UserActivity, R.color.color_notification_bg)
-                    ID_ACCOUNT -> ContextCompat.getColor(this@UserActivity, R.color.color_profile_bg)
-                    else -> ContextCompat.getColor(this@UserActivity, R.color.colorPrimary)
-                }
-
-//                tvSelected.text = getString(R.string.main_page_selected, name)
-//                binding.lnrLayout.setBackgroundColor(bgColor)
-            }
-
-            setOnClickMenuListener {
-                val name = when (it.id) {
-                    ID_HOME -> "HOME"
-                    ID_EXPLORE -> "EXPLORE"
-                    ID_MESSAGE -> "MESSAGE"
-                    ID_NOTIFICATION -> "NOTIFICATION"
-                    ID_ACCOUNT -> "ACCOUNT"
-                    else -> ""
-                }
-                toast(name)
-            }
-
-            setOnReselectListener {
-                Toast.makeText(context, "item ${it.id} is reselected.", Toast.LENGTH_LONG).show()
-            }
-
-
+        bottomNavigation.setOnShowListener {
         }
 
+        bottomNavigation.setOnClickMenuListener {
+        }
     }
 
 
