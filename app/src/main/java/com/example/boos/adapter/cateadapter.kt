@@ -29,7 +29,7 @@ class cateadapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         Glide.with(activity)
-            .load(R.drawable.index)
+            .load(R.drawable.wheats)
             .placeholder(R.drawable.index)
             .into(holder.payimages)    }
 

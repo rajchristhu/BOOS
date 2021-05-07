@@ -1,15 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.gauravk.bubblenavigation:bubblenavigation:1.0.7@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b55e3584e78a3be48aeab15629649849/jetified-bubblenavigation-1.0.7/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b55e3584e78a3be48aeab15629649849/jetified-bubblenavigation-1.0.7/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b55e3584e78a3be48aeab15629649849/jetified-bubblenavigation-1.0.7/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8e8c0107af63f245961dd84516221d75/jetified-bubblenavigation-1.0.7/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8e8c0107af63f245961dd84516221d75/jetified-bubblenavigation-1.0.7/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8e8c0107af63f245961dd84516221d75/jetified-bubblenavigation-1.0.7/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a11110d4c5b5b819e00041e65c390f9e/jetified-bubblenavigation-1.0.7/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a11110d4c5b5b819e00041e65c390f9e/jetified-bubblenavigation-1.0.7/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a11110d4c5b5b819e00041e65c390f9e/jetified-bubblenavigation-1.0.7/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4cb34750cf5438f571b83f8739d51873/jetified-bubblenavigation-1.0.7/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4cb34750cf5438f571b83f8739d51873/jetified-bubblenavigation-1.0.7/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4cb34750cf5438f571b83f8739d51873/jetified-bubblenavigation-1.0.7/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.gauravk.bubblenavigation/bubblenavigation/1.0.7/753c7ccc9b61620e70da697e84d57b0af5156f61/bubblenavigation-1.0.7-javadoc.jar!/" />

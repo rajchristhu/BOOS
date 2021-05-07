@@ -1,15 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.iammert:MaterialIntroView:1.6.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4cad1ab0ab99466245ed6027b73098e2/jetified-MaterialIntroView-1.6.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4cad1ab0ab99466245ed6027b73098e2/jetified-MaterialIntroView-1.6.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4cad1ab0ab99466245ed6027b73098e2/jetified-MaterialIntroView-1.6.0/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3498ce3406494a8fe3bd2934561d2593/jetified-MaterialIntroView-1.6.0/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3498ce3406494a8fe3bd2934561d2593/jetified-MaterialIntroView-1.6.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3498ce3406494a8fe3bd2934561d2593/jetified-MaterialIntroView-1.6.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0a3fd0bd6f1f63f787f133d67cda80e4/jetified-MaterialIntroView-1.6.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0a3fd0bd6f1f63f787f133d67cda80e4/jetified-MaterialIntroView-1.6.0/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0a3fd0bd6f1f63f787f133d67cda80e4/jetified-MaterialIntroView-1.6.0/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b32c65d7d34ae4c1828a88ec359c0fb4/jetified-MaterialIntroView-1.6.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b32c65d7d34ae4c1828a88ec359c0fb4/jetified-MaterialIntroView-1.6.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b32c65d7d34ae4c1828a88ec359c0fb4/jetified-MaterialIntroView-1.6.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

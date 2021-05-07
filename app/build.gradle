@@ -128,6 +128,8 @@ dependencies {
     implementation 'com.github.smhdk:KM-Recyclerview-Sticky-Header:v1.0.0'
     implementation 'com.shuhart.stickyheader:stickyheader:1.0.6'
 
+    implementation 'com.github.smarteist:autoimageslider:1.4.0'
+    implementation 'com.github.denzcoskun:ImageSlideshow:0.0.7'
 
 
 
