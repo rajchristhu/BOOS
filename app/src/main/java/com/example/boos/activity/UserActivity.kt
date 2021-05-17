@@ -110,7 +110,7 @@ class UserActivity : AppCompatActivity() {
 
         bottomNavigation.setOnClickMenuListener {
         }
-        changeFragment(HomeFragment(),"home")
+//        changeFragment(HomeFragment(),"home")
     }
 
 

@@ -33,14 +33,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppThems"
         tools:replace="android:theme,android:icon">
-        <activity android:name=".start.OtpScreen"></activity>
+        <activity android:name=".activity.DealFormActivity"></activity>
+        <activity android:name=".start.OtpScreen" />
         <activity android:name=".start.GetStart" />
         <activity android:name=".start.Loginpage" />
         <activity android:name=".start.AdminActivity" />
         <activity android:name=".start.OwnerTabActivity" />
         <activity android:name=".start.DeleveryBoy" />
-        <activity android:name=".activity.UserActivity"
-            />
+        <activity android:name=".activity.UserActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".start.SplashActivity">
             <intent-filter>
@@ -52,13 +52,14 @@
         <activity
             android:name=".map.MapActivity"
             android:screenOrientation="portrait" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
+
         <service
             android:name=".map.FetchAddressIntentService"
-            android:exported="false"
-           />
+            android:exported="false" />
     </application>
 
 </manifest>

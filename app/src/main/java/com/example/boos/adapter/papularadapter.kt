@@ -6,13 +6,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.denzcoskun.imageslider.models.SlideModel
 import com.example.boos.R
+import com.example.boos.model.cateModel
 import kotlinx.android.synthetic.main.papularadapter.view.*
 
 class papularadapter(
     val activity: FragmentActivity,
-    private val slideModels: MutableList<SlideModel>
+    private val slideModels: MutableList<cateModel>
 ) :
     RecyclerView.Adapter<papularadapter.ViewHolder>() {
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -29,13 +29,18 @@ class papularadapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val data = slideModels[position]
         Glide.with(activity)
-            .load(slideModels[position].imageUrl)
+            .load(data.cateimage)
             .placeholder(R.drawable.index)
             .into(holder.payimages)
     }
 
     override fun getItemCount(): Int {
-       return slideModels.size
+        return if (slideModels.size >= 5) {
+            5
+        } else {
+            slideModels.size
+        }
     }
 }

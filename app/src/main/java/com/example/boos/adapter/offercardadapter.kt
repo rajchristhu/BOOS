@@ -4,15 +4,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.View
 import androidx.fragment.app.FragmentActivity
-import androidx.recyclerview.widget.LinearLayoutManager
 
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.boos.R
-import kotlinx.android.synthetic.main.home_fragment.*
+import com.example.boos.model.dealModel
 import kotlinx.android.synthetic.main.offeradapter.view.*
 
-class offercardadapter( val activity: FragmentActivity) :
+class offercardadapter(val activity: FragmentActivity, val offerList: MutableList<dealModel>) :
     RecyclerView.Adapter<offercardadapter.ViewHolder>() {
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val payimages = itemView.payimages
@@ -26,13 +25,14 @@ class offercardadapter( val activity: FragmentActivity) :
     }
 
     override fun onBindViewHolder(holder: offercardadapter.ViewHolder, position: Int) {
+        val data=offerList[position]
         Glide.with(activity)
-            .load(R.drawable.yui)
+            .load(data.image)
             .placeholder(R.drawable.index)
             .into(holder.payimages)
     }
 
     override fun getItemCount(): Int {
-        return 5
+        return offerList.size
     }
 }

@@ -1,62 +1,55 @@
-package com.example.boos.adapter;
+package com.example.boos.adapter
 
+import android.view.ViewGroup
+import androidx.cardview.widget.CardView
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentStatePagerAdapter
+import com.example.boos.fragment.CardFragment
+import com.example.boos.fragment.CardFragment.Companion.getInstance
+import com.example.boos.model.dealModel
+import java.util.*
 
-import android.view.ViewGroup;
+class CardFragmentPagerAdapter(
+    fm: FragmentManager?,
+    baseElevation: Float,
+    trendList: List<dealModel?>
+) : FragmentStatePagerAdapter(
+    fm!!
+), CardAdapter {
+    private val fragments: MutableList<CardFragment>
+    private val baseElevation: Float
+    override fun getBaseElevation(): Float {
+        return baseElevation
+    }
 
-import androidx.cardview.widget.CardView;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentStatePagerAdapter;
+    override fun getCardViewAt(position: Int): CardView {
+        return fragments[position].cardView!!
+    }
 
-import com.example.boos.fragment.CardFragment;
+    override fun getCount(): Int {
+        return fragments.size
+    }
 
-import java.util.ArrayList;
-import java.util.List;
+    override fun getItem(position: Int): Fragment {
+        return getInstance(position)
+    }
 
-public class CardFragmentPagerAdapter extends FragmentStatePagerAdapter implements CardAdapter {
+    override fun instantiateItem(container: ViewGroup, position: Int): Any {
+        val fragment = super.instantiateItem(container, position)
+        fragments[position] = fragment as CardFragment
+        return fragment
+    }
 
-    private List<CardFragment> fragments;
-    private float baseElevation;
+    fun addCardFragment(fragment: CardFragment) {
+        fragments.add(fragment)
+    }
 
-    public CardFragmentPagerAdapter(FragmentManager fm, float baseElevation) {
-        super(fm);
-        fragments = new ArrayList<>();
-        this.baseElevation = baseElevation;
-
-        for(int i = 0; i< 8; i++){
-            addCardFragment(new CardFragment());
+    init {
+        fragments = ArrayList()
+        this.baseElevation = baseElevation
+        for (i in trendList.indices) {
+            addCardFragment(CardFragment(trendList as MutableList<dealModel>,i))
         }
     }
-
-    @Override
-    public float getBaseElevation() {
-        return baseElevation;
-    }
-
-    @Override
-    public CardView getCardViewAt(int position) {
-        return fragments.get(position).getCardView();
-    }
-
-    @Override
-    public int getCount() {
-        return fragments.size();
-    }
-
-    @Override
-    public Fragment getItem(int position) {
-        return CardFragment.getInstance(position);
-    }
-
-    @Override
-    public Object instantiateItem(ViewGroup container, int position) {
-        Object fragment = super.instantiateItem(container, position);
-        fragments.set(position, (CardFragment) fragment);
-        return fragment;
-    }
-
-    public void addCardFragment(CardFragment fragment) {
-        fragments.add(fragment);
-    }
-
 }
