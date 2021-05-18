@@ -6,7 +6,6 @@ import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Color
 import android.location.Geocoder
 import android.location.Location
 import android.location.LocationManager
@@ -15,22 +14,16 @@ import android.os.*
 import androidx.appcompat.app.AppCompatActivity
 import android.provider.Settings
 import android.util.Log
-import android.view.View
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.core.view.get
 import androidx.fragment.app.Fragment
-import com.ckdroid.geofirequery.setLocation
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 import com.example.boos.R
-import com.example.boos.fragment.HomeFragment
+import com.example.boos.fragment.*
 import com.example.boos.locs.GpsTracker
 import com.example.boos.map.MapActivity
 import com.example.boos.util.GeocoderHandler
 import com.example.boos.utili.SessionMaintainence
-import com.github.kwasow.bottomnavigationcircles.BottomNavigationCircles
 import com.google.android.gms.location.*
 import com.google.firebase.firestore.FirebaseFirestore
 import com.simform.custombottomnavigation.SSCustomBottomNavigation
@@ -44,6 +37,7 @@ import java.util.*
 
 class UserActivity : AppCompatActivity() {
     private var numVisibleChildren = 4
+
     companion object {
         private const val ID_HOME = 1
         private const val ID_EXPLORE = 2
@@ -51,6 +45,7 @@ class UserActivity : AppCompatActivity() {
         private const val ID_NOTIFICATION = 4
         private const val ID_ACCOUNT = 5
     }
+
     public var gpsTracker: GpsTracker? = null
     var lat: Double? = null
     var longs: Double? = null
@@ -103,17 +98,26 @@ class UserActivity : AppCompatActivity() {
         bottomNavigation.add(MeowBottomNavigation.Model(3, R.drawable.home))
         bottomNavigation.add(MeowBottomNavigation.Model(4, R.drawable.cart))
         bottomNavigation.add(MeowBottomNavigation.Model(5, R.drawable.history))
-        bottomNavigation.show(3)
+        bottomNavigation.setCount(4, "2")
 
         bottomNavigation.setOnShowListener {
         }
 
+
+
         bottomNavigation.setOnClickMenuListener {
+            when (it.id) {
+                1 -> changeFragment(OfferFrag(), "offer")
+                2 -> changeFragment(TrackFrag(), "track")
+                3 -> changeFragment(HomeFragment(), "home")
+                4 -> changeFragment(CartFragment(), "cart")
+                5 -> changeFragment(HistoryFragment(), "history")
+                else -> changeFragment(HomeFragment(), "home")
+            }
         }
+        bottomNavigation.show(3)
 //        changeFragment(HomeFragment(),"home")
     }
-
-
 
 
     fun dpToPx(dp: Float): Float = resources.displayMetrics.density * dp
@@ -190,7 +194,7 @@ class UserActivity : AppCompatActivity() {
                 } else {
                     locationtext.text = SessionMaintainence.instance!!.addressverify!!
                 }
-                changeFragment(HomeFragment(),"home")
+                changeFragment(HomeFragment(), "home")
 
 //                changeFragment(GroceryFragment(), "grocery")
             } else {
@@ -377,7 +381,7 @@ class UserActivity : AppCompatActivity() {
                 } else {
                     locationtext.text = result
                 }
-                changeFragment(HomeFragment(),"home")
+                changeFragment(HomeFragment(), "home")
 
 //                changeFragment(MainFragment(), "mainfrag")
 

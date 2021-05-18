@@ -125,6 +125,9 @@ dependencies {
     implementation 'com.github.iammert:MaterialIntroView:1.6.0'
     implementation 'com.github.smarteist:autoimageslider:1.4.0-appcompat'
     implementation 'com.gauravk.bubblenavigation:bubblenavigation:1.0.7'
+    def room_version = "2.2.1"
+    kapt "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-ktx:2.2.1"
 
     implementation 'com.github.smhdk:KM-Recyclerview-Sticky-Header:v1.0.0'
     implementation 'com.shuhart.stickyheader:stickyheader:1.0.6'

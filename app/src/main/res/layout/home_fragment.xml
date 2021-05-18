@@ -148,7 +148,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/csd"
                 android:layout_width="0dp"
-                android:layout_height="210dp"
+                android:layout_height="160dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
 
@@ -172,6 +172,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         app:iss_auto_cycle="true"
+                        app:iss_title_background="@drawable/gre"
                         app:iss_delay="0"
                         app:iss_error_image="@drawable/place"
                         app:iss_period="3000"
