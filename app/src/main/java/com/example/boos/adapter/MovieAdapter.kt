@@ -31,11 +31,16 @@ class MovieAdapter(private val movies: MutableList<dealModel>, val activity: Fra
                 .load(movie.image)
                 .placeholder(R.drawable.index)
                 .into(movie_poster!!)
+
 //            movie_title.text = movie.title
 //            movie_overview.text = movie.overview
         }
+
     }
 
     class MovieViewHolder(view: View) : RecyclerView.ViewHolder(view)
+    {
+
+    }
 
 }

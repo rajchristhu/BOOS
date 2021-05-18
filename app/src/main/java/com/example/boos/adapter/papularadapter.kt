@@ -7,8 +7,10 @@ import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.boos.R
+import com.example.boos.activity.ItemActivity
 import com.example.boos.model.cateModel
 import kotlinx.android.synthetic.main.papularadapter.view.*
+import org.jetbrains.anko.startActivity
 
 class papularadapter(
     val activity: FragmentActivity,
@@ -34,6 +36,9 @@ class papularadapter(
             .load(data.cateimage)
             .placeholder(R.drawable.index)
             .into(holder.payimages)
+        holder.kadaiclick.setOnClickListener {
+            activity!!.startActivity<ItemActivity>("id" to data.id, "img" to data.cateimage)
+        }
     }
 
     override fun getItemCount(): Int {

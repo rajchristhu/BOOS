@@ -5,7 +5,6 @@ import android.app.ProgressDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.location.Location
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,18 +12,13 @@ import android.provider.MediaStore
 import android.view.View
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.ckdroid.geofirequery.GeoQuery
 import com.ckdroid.geofirequery.model.Distance
-import com.ckdroid.geofirequery.setLocation
 import com.ckdroid.geofirequery.utils.BoundingBoxUtils
 import com.example.boos.R
-import com.example.boos.Room.GroceryDatabase
-import com.example.boos.Room.GroceryRepository
-import com.example.boos.Room.GroceryViewModel
-import com.example.boos.Room.GroceryViewModelFactory
+import com.example.boos.Room.*
 import com.example.boos.adapter.itemadapter
 import com.example.boos.model.itemModel
 import com.example.boos.utili.SessionMaintainence
@@ -55,13 +49,36 @@ class ItemActivity : AppCompatActivity() {
     var img: String? = ""
     var progress: ProgressDialog? = null
     var firestoreDB: FirebaseFirestore? = null
+    lateinit var ViewModel: GroceryViewModel
+    val list = mutableListOf<GroceryItems>()
 
     var imageLinks: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item)
-        if (SessionMaintainence!!.instance!!.userType == "buyer") {
-            additem.visibility = View.VISIBLE
+        val groceryRepository = GroceryRepository(GroceryDatabase(this!!))
+
+        val factory = GroceryViewModelFactory(groceryRepository)
+
+        ViewModel = ViewModelProviders.of(this, factory).get(GroceryViewModel::class.java)
+        ViewModel.allGroceryItems().observe(this, androidx.lifecycle.Observer {
+            list.clear()
+            list.addAll(it)
+            ViewModel.addIssuePost(it)
+            if (list.size != 0) {
+                textView15.visibility = View.VISIBLE
+                textView15.text = list.size.toString()
+            } else {
+                textView15.visibility = View.GONE
+
+            }
+        })
+
+
+
+
+        if (SessionMaintainence!!.instance!!.userType == "buyer" || SessionMaintainence!!.instance!!.userType == "") {
+            additem.visibility = View.GONE
         } else {
             additem.visibility = View.VISIBLE
         }
@@ -97,8 +114,8 @@ class ItemActivity : AppCompatActivity() {
 
                 val acceptHorizontalLayoutsss11 =
                     LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-                recyclerView!!.layoutManager = acceptHorizontalLayoutsss11
-                recyclerView!!.adapter = itemadapter(this!!, dealList)
+                recyclerViews!!.layoutManager = acceptHorizontalLayoutsss11
+                recyclerViews!!.adapter = itemadapter(this!!, dealList)
 
 //                adapterSet(dealList, kadaiFoodList)
             }

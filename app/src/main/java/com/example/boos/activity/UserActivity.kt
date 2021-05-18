@@ -14,11 +14,15 @@ import android.os.*
 import androidx.appcompat.app.AppCompatActivity
 import android.provider.Settings
 import android.util.Log
+import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 import com.example.boos.R
+import com.example.boos.Room.*
 import com.example.boos.fragment.*
 import com.example.boos.locs.GpsTracker
 import com.example.boos.map.MapActivity
@@ -37,6 +41,8 @@ import java.util.*
 
 class UserActivity : AppCompatActivity() {
     private var numVisibleChildren = 4
+    lateinit var ViewModel: GroceryViewModel
+    val list = mutableListOf<GroceryItems>()
 
     companion object {
         private const val ID_HOME = 1
@@ -59,6 +65,24 @@ class UserActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user)
+        val groceryRepository = GroceryRepository(GroceryDatabase(this!!))
+
+        val factory = GroceryViewModelFactory(groceryRepository)
+
+        ViewModel = ViewModelProviders.of(this, factory).get(GroceryViewModel::class.java)
+        ViewModel.allGroceryItems().observe(this, androidx.lifecycle.Observer {
+            list.clear()
+            list.addAll(it)
+            ViewModel.addIssuePost(it)
+            if (list.size != 0) {
+                bottomNavigation.setCount(4, list.size.toString())
+            }
+        })
+
+        ViewModel.mIssuePostLiveData.observe(this, androidx.lifecycle.Observer {
+
+
+        })
         mFusedLocationClient =
             LocationServices.getFusedLocationProviderClient(this)
         when (from) {
@@ -98,7 +122,6 @@ class UserActivity : AppCompatActivity() {
         bottomNavigation.add(MeowBottomNavigation.Model(3, R.drawable.home))
         bottomNavigation.add(MeowBottomNavigation.Model(4, R.drawable.cart))
         bottomNavigation.add(MeowBottomNavigation.Model(5, R.drawable.history))
-        bottomNavigation.setCount(4, "2")
 
         bottomNavigation.setOnShowListener {
         }

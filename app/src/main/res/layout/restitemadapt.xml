@@ -143,6 +143,7 @@
                 android:text="In stack"
                 android:textColor="@color/black"
                 android:textSize="13sp"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/cardView5" />
@@ -156,6 +157,7 @@
                 android:textColor="#2C3F64"
 
                 android:textSize="15sp"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="@+id/prices"
                 app:layout_constraintTop_toTopOf="@+id/desc" />
         </androidx.constraintlayout.widget.ConstraintLayout>

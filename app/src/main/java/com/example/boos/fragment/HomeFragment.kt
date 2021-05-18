@@ -91,7 +91,7 @@ class HomeFragment : Fragment() {
 
         deal()
 
-        if (SessionMaintainence!!.instance!!.userType == "buyer") {
+        if (SessionMaintainence!!.instance!!.userType == "buyer" || SessionMaintainence!!.instance!!.userType == "") {
             adddeal.visibility = View.GONE
             addoffer.visibility = View.GONE
             addtrends.visibility = View.GONE
