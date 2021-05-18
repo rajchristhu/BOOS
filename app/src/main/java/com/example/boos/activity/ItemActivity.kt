@@ -61,7 +61,7 @@ class ItemActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item)
         if (SessionMaintainence!!.instance!!.userType == "buyer") {
-            additem.visibility = View.GONE
+            additem.visibility = View.VISIBLE
         } else {
             additem.visibility = View.VISIBLE
         }
@@ -96,7 +96,7 @@ class ItemActivity : AppCompatActivity() {
                 }
 
                 val acceptHorizontalLayoutsss11 =
-                    LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+                    LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
                 recyclerView!!.layoutManager = acceptHorizontalLayoutsss11
                 recyclerView!!.adapter = itemadapter(this!!, dealList)
 

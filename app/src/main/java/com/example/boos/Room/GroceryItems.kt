@@ -20,9 +20,12 @@ data class GroceryItems(
     // create itemQuantity variable
     // to store grocery quantity.
     @ColumnInfo(name = "itemQuantity")
-    var itemQuantity: Int,
+    var itemQuantity: String,
     @ColumnInfo(name = "ids")
     var ids: String,
+
+    @ColumnInfo(name = "mainids")
+    var mainids: String,
     @ColumnInfo(name = "count")
     var count: Int,
     // create itemPrice variable to

@@ -6,11 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
 import com.example.boos.R
 import com.example.boos.Room.*
 import com.example.boos.activity.ItemActivity
 import com.example.boos.model.itemModel
+import kotlinx.android.synthetic.main.activity_item.*
 import kotlinx.android.synthetic.main.restitemadapt.view.*
 
 class itemadapter(val itemActivity: ItemActivity, val dealList: MutableList<itemModel>) :
@@ -49,7 +51,10 @@ class itemadapter(val itemActivity: ItemActivity, val dealList: MutableList<item
         holder.prices.text = data.quan
         val groceryRepository = GroceryRepository(GroceryDatabase(itemActivity!!))
         val factory = GroceryViewModelFactory(groceryRepository)
-
+        Glide.with(itemActivity)
+            .load(data.image)
+            .placeholder(R.drawable.index)
+            .into(holder.itemeImg)
         // Initialised View Model
         ViewModel = ViewModelProvider(itemActivity, factory).get(GroceryViewModel::class.java)
         holder.butts.setOnClickListener {
@@ -57,18 +62,33 @@ class itemadapter(val itemActivity: ItemActivity, val dealList: MutableList<item
             if (s.isNotEmpty()) {
                 holder.butts.visibility = View.INVISIBLE
                 holder.numberPicker.visibility = View.VISIBLE
-//                val items = GroceryItems("", 1, data.id, s[s.lastIndex].count + 1, 100)
-//                ViewModel.update(s[s.lastIndex].count , data.id)
-//                holder.numberPicker.number = (s[s.lastIndex].count ).toString()
+                val items = GroceryItems(
+                    data.name,
+                    data.quan,
+                    data.id,
+                    data.itemid,
+                    s[s.lastIndex].count + 1,
+                    data.itempri.toInt()
+                )
+                ViewModel.update(s[s.lastIndex].count + 1, data.id)
+                holder.numberPicker.number = (s[s.lastIndex].count + 1).toString()
             } else {
                 holder.butts.visibility = View.INVISIBLE
                 holder.numberPicker.visibility = View.VISIBLE
-                val item = GroceryItems("", 1, data.id, 1, 100)
+                val item = GroceryItems(
+                    data.name,
+                    data.quan,
+                    data.id,
+                    data.itemid,
+                    1,
+                    data.itempri.toInt()
+                )
                 holder.numberPicker.number = "1"
                 ViewModel.insert(item)
             }
 
         }
+
         holder.numberPicker.setOnValueChangeListener(ElegantNumberButton.OnValueChangeListener { view, oldValue, newValue ->
             Log.e("cd", (list.size).toString())
 
@@ -94,28 +114,35 @@ class itemadapter(val itemActivity: ItemActivity, val dealList: MutableList<item
 
         })
 
+
         ViewModel.allGroceryItems().observe(itemActivity, androidx.lifecycle.Observer {
             list.clear()
             list.addAll(it)
-            val ss = list.filter { it.ids == data.id }
-            if (ss.isNotEmpty()) {
-                holder.butts.visibility = View.INVISIBLE
-                holder.numberPicker.visibility = View.VISIBLE
+            val sss = list.filter { it.ids == data.id }
+            ViewModel.addIssuePost(it)
 
-//            val items = GroceryItems("", 1, 10, s[s.lastIndex].count + 1, 100)
-//            ViewModel.update(s[s.lastIndex].count + 1, 10)
-//            number_picker.number = (s[s.lastIndex].count + 1).toString()
-//            textView.text = (list.size).toString()
+        })
+
+        ViewModel.mIssuePostLiveData.observe(itemActivity, androidx.lifecycle.Observer {
+            val ssas = it.filter { it.ids == data.id }
+
+            if (ssas.size != 0) {
+                if (ssas.last().count == 0) {
+                    ViewModel.deletepar(data.id)
+                    holder.butts.visibility = View.VISIBLE
+                    holder.numberPicker.visibility = View.INVISIBLE
+                } else {
+                    holder.butts.visibility = View.INVISIBLE
+                    holder.numberPicker.visibility = View.VISIBLE
+                    holder.numberPicker.number = ssas.last().count.toString()
+                }
+
             } else {
                 holder.butts.visibility = View.VISIBLE
                 holder.numberPicker.visibility = View.INVISIBLE
-
-//            val item = GroceryItems("", 1, 10, 1, 100)
-//            number_picker.number = "1"
-//            ViewModel.insert(item)
-//            textView.text = "1"
             }
         })
+
 
     }
 }

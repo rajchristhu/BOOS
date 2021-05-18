@@ -1,5 +1,6 @@
 package com.example.boos.Room
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.boos.Room.GroceryRepository
 
@@ -7,6 +8,8 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class GroceryViewModel(private val repository: GroceryRepository) : ViewModel() {
+    private val mIssuePosts = ArrayList<GroceryItems>()
+     val mIssuePostLiveData = MutableLiveData<List<GroceryItems>>()
 
     // In coroutines thread insert item in insert function.
     fun insert(item: GroceryItems) = GlobalScope.launch {
@@ -28,6 +31,10 @@ class GroceryViewModel(private val repository: GroceryRepository) : ViewModel() 
         repository.deletepar(i)
     }
 
+    fun addIssuePost(issuePost: List<GroceryItems>) {
+        mIssuePosts.addAll(issuePost)
+        mIssuePostLiveData.value = mIssuePosts
+    }
     //Here we initialized allGroceryItems function with repository
     fun allGroceryItems() = repository.allGroceryItems()
 
