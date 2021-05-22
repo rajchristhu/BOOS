@@ -20,6 +20,7 @@ import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import com.bumptech.glide.Glide
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 import com.example.boos.R
 import com.example.boos.Room.*
@@ -69,13 +70,28 @@ class UserActivity : AppCompatActivity() {
 
         val factory = GroceryViewModelFactory(groceryRepository)
 
+        Glide.with(this)
+            .load(SessionMaintainence.instance!!.profilepic)
+            .placeholder(R.drawable.profilepng)
+            .into(profileimage)
         ViewModel = ViewModelProviders.of(this, factory).get(GroceryViewModel::class.java)
+        ViewModel!!.namess.observe(this, androidx.lifecycle.Observer {
+            Glide.with(this)
+                .load(SessionMaintainence.instance!!.profilepic)
+                .placeholder(R.drawable.profilepng)
+                .into(profileimage)
+        })
+        profileimage.setOnClickListener {
+            startActivity<ProActivity>()
+        }
         ViewModel.allGroceryItems().observe(this, androidx.lifecycle.Observer {
             list.clear()
             list.addAll(it)
             ViewModel.addIssuePost(it)
             if (list.size != 0) {
                 bottomNavigation.setCount(4, list.size.toString())
+            } else {
+                bottomNavigation.setCount(4, "0")
             }
         })
 

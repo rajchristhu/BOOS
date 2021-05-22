@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.tbuonomo:magicshapepath:1.0.0-alpha3@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5d0d86674f82abd1c3cbb66b2924276e/jetified-magicshapepath-1.0.0-alpha3/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5d0d86674f82abd1c3cbb66b2924276e/jetified-magicshapepath-1.0.0-alpha3/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5d0d86674f82abd1c3cbb66b2924276e/jetified-magicshapepath-1.0.0-alpha3/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/683f4001e23ed8ce07e157c6d4feeac0/jetified-magicshapepath-1.0.0-alpha3/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/683f4001e23ed8ce07e157c6d4feeac0/jetified-magicshapepath-1.0.0-alpha3/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/683f4001e23ed8ce07e157c6d4feeac0/jetified-magicshapepath-1.0.0-alpha3/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.tbuonomo/magicshapepath/1.0.0-alpha3/ea700c32f2f055f21a0c80494e14fe1e9f74e13/magicshapepath-1.0.0-alpha3-javadoc.jar!/" />

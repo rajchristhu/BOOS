@@ -10,7 +10,19 @@ import kotlinx.coroutines.launch
 class GroceryViewModel(private val repository: GroceryRepository) : ViewModel() {
     private val mIssuePosts = ArrayList<GroceryItems>()
      val mIssuePostLiveData = MutableLiveData<List<GroceryItems>>()
+    val names: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
+    }
+    val name: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
+    }
+    val namess: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
+    }
+    fun insertnamess(someValue: String) {
+        namess.value = someValue
 
+    }
     // In coroutines thread insert item in insert function.
     fun insert(item: GroceryItems) = GlobalScope.launch {
         repository.insert(item)
@@ -18,7 +30,13 @@ class GroceryViewModel(private val repository: GroceryRepository) : ViewModel() 
     fun update(item: Int, i: String) = GlobalScope.launch {
         repository.update(item,i)
     }
+    fun insertstr(someValue: String) {
+        names.value = someValue
+    }
+    fun insertname(someValue: String) {
+        name.value = someValue
 
+    }
 
     // In coroutines thread delete item in delete function.
     fun delete(item: GroceryItems) = GlobalScope.launch {

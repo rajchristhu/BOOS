@@ -1,5 +1,6 @@
 package com.example.boos.adapter
 
+import android.graphics.Paint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -49,6 +50,10 @@ class itemadapter(val itemActivity: ItemActivity, val dealList: MutableList<item
         val data = dealList[position]
         holder.itname.text = data.name
         holder.prices.text = data.quan
+        holder.desc.text = data.itempri + " ₹"
+        holder.textView60.visibility = View.VISIBLE
+        holder.textView60.text = data.oripri + " ₹"
+        holder.textView60.paintFlags = holder.textView60.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
         val groceryRepository = GroceryRepository(GroceryDatabase(itemActivity!!))
         val factory = GroceryViewModelFactory(groceryRepository)
         Glide.with(itemActivity)

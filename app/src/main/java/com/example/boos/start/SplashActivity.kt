@@ -49,7 +49,7 @@ class SplashActivity() : AppCompatActivity(){
                             "admin" -> {
                                 SessionMaintainence.instance!!.adds = false
 
-                                startActivity<AdminActivity>()
+                                startActivity<UserActivity>()
                                 finish()
                             }
 //                            "madmin" -> {

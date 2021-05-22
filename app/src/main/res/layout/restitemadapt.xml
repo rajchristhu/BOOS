@@ -81,17 +81,18 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginEnd="8dp"
                 android:focusable="false"
-                android:visibility="gone"
+                android:visibility="visible"
                 app:backGroundColor="@color/colorPrimaryDark"
                 app:backgroundDrawable="@drawable/back"
                 app:initialNumber="0"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/itname"
+                app:layout_constraintTop_toTopOf="parent"
                 app:textSize="5.5sp" />
 
             <Button
                 android:id="@+id/butts"
+
                 android:layout_width="96dp"
                 android:layout_height="36dp"
                 android:layout_centerHorizontal="true"
@@ -101,7 +102,7 @@
                 android:text="Add"
                 android:textAllCaps="false"
                 android:textColor="@color/black"
-                android:visibility="visible"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

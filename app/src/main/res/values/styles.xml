@@ -54,7 +54,7 @@
     </style>
 
     <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
-        <item name="android:background">@drawable/rounded_dialog</item>
+        <item name="android:background">@drawable/rounds</item>
     </style>
 
     <style name="TextLabel" parent="TextAppearance.AppCompat">

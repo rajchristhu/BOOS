@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.iammert:MaterialIntroView:1.6.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b32c65d7d34ae4c1828a88ec359c0fb4/jetified-MaterialIntroView-1.6.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b32c65d7d34ae4c1828a88ec359c0fb4/jetified-MaterialIntroView-1.6.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b32c65d7d34ae4c1828a88ec359c0fb4/jetified-MaterialIntroView-1.6.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/88266c1fff30d561786d6c785523410e/jetified-MaterialIntroView-1.6.0/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/88266c1fff30d561786d6c785523410e/jetified-MaterialIntroView-1.6.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/88266c1fff30d561786d6c785523410e/jetified-MaterialIntroView-1.6.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.devdhar04:MaterialSpinner:v0.1.2@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/dc2442119a1c55b9414ad7fde4fb795f/jetified-MaterialSpinner-v0.1.2/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/dc2442119a1c55b9414ad7fde4fb795f/jetified-MaterialSpinner-v0.1.2/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/dc2442119a1c55b9414ad7fde4fb795f/jetified-MaterialSpinner-v0.1.2/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1c9ca55688a27a81885a3146b12e1e4a/jetified-MaterialSpinner-v0.1.2/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1c9ca55688a27a81885a3146b12e1e4a/jetified-MaterialSpinner-v0.1.2/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1c9ca55688a27a81885a3146b12e1e4a/jetified-MaterialSpinner-v0.1.2/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

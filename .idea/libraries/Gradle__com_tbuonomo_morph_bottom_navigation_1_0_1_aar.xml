@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.tbuonomo:morph-bottom-navigation:1.0.1@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/557bce6c44ebc824e62669d71ad079e5/jetified-morph-bottom-navigation-1.0.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/557bce6c44ebc824e62669d71ad079e5/jetified-morph-bottom-navigation-1.0.1/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/557bce6c44ebc824e62669d71ad079e5/jetified-morph-bottom-navigation-1.0.1/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/20ceb7bb6cefe535e6804b250d0627ef/jetified-morph-bottom-navigation-1.0.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/20ceb7bb6cefe535e6804b250d0627ef/jetified-morph-bottom-navigation-1.0.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/20ceb7bb6cefe535e6804b250d0627ef/jetified-morph-bottom-navigation-1.0.1/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.tbuonomo/morph-bottom-navigation/1.0.1/6a9ac3c466c8562f3139a697948a5580d0defe8c/morph-bottom-navigation-1.0.1-javadoc.jar!/" />

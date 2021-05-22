@@ -33,7 +33,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppThems"
         tools:replace="android:theme,android:icon">
-        <activity android:name=".activity.ItemActivity"></activity>
+        <activity android:name=".activity.ProActivity"></activity>
+        <activity android:name=".activity.ItemActivity" />
         <activity android:name=".activity.DealFormActivity" />
         <activity android:name=".start.OtpScreen" />
         <activity android:name=".start.GetStart" />
@@ -57,6 +58,9 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
 
         <service
             android:name=".map.FetchAddressIntentService"

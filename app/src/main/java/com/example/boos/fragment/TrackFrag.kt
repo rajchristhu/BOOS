@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.boos.R
+import kotlinx.android.synthetic.main.activity_user.*
 
 class TrackFrag : Fragment() {
 
@@ -25,7 +26,10 @@ class TrackFrag : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        // TODO: Use the ViewModel
+        activity!!.bottomNavigation.show(2)
+        activity!!.locationtext.visibility=View.GONE
+        activity!!.imageView.visibility=View.GONE
+        activity!!.textView13.text="Track Order"
     }
 
 }

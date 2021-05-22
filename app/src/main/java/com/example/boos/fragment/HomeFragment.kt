@@ -16,7 +16,9 @@ import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.ckdroid.geofirequery.GeoQuery
 import com.ckdroid.geofirequery.model.Distance
 import com.ckdroid.geofirequery.setLocation
@@ -24,6 +26,10 @@ import com.ckdroid.geofirequery.utils.BoundingBoxUtils
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
 import com.example.boos.R
+import com.example.boos.Room.GroceryDatabase
+import com.example.boos.Room.GroceryRepository
+import com.example.boos.Room.GroceryViewModel
+import com.example.boos.Room.GroceryViewModelFactory
 import com.example.boos.adapter.*
 import com.example.boos.model.cateModel
 import com.example.boos.model.dealModel
@@ -32,10 +38,12 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
+import kotlinx.android.synthetic.main.activity_user.*
 import kotlinx.android.synthetic.main.addca.*
 import kotlinx.android.synthetic.main.adminbottom.*
 import kotlinx.android.synthetic.main.adminbottom.buttonas
 import kotlinx.android.synthetic.main.home_fragment.*
+import kotlinx.android.synthetic.main.profile_bottom_sheet_dialog.*
 import org.jetbrains.anko.toast
 import java.io.ByteArrayOutputStream
 
@@ -73,10 +81,12 @@ class HomeFragment : Fragment() {
     var bitmapsst: Bitmap? = null
 
     companion object {
+        private const val OPEN_DOCUMENT_CODE = 2
+
         fun newInstance() = HomeFragment()
     }
 
-    private lateinit var viewModel: HomeViewModel
+    lateinit var ViewModel: GroceryViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -87,7 +97,18 @@ class HomeFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        shimmer_view_container.visibility = View.VISIBLE
+        shimmer_view_container.startShimmerAnimation();
+        val groceryRepository = GroceryRepository(GroceryDatabase(activity!!))
 
+        val factory = GroceryViewModelFactory(groceryRepository)
+        scr.visibility = View.GONE
+        ViewModel = ViewModelProviders.of(this, factory).get(GroceryViewModel::class.java)
+
+        activity!!.bottomNavigation.show(3)
+        activity!!.locationtext.visibility=View.VISIBLE
+        activity!!.imageView.visibility=View.VISIBLE
+        activity!!.textView13.text = "BOSS"
 
         deal()
 
@@ -375,6 +396,51 @@ class HomeFragment : Fragment() {
                 MediaStore.Images.Media.getBitmap(activity!!.contentResolver, imageUri1st)
 
         }
+        if (requestCode == OPEN_DOCUMENT_CODE && resultCode == Activity.RESULT_OK) {
+            if (data != null) {
+                // this is the image selected by the user
+                val imageUris = data.data
+                val bitmap = MediaStore.Images.Media.getBitmap(activity!!.contentResolver, imageUris)
+                uploadFile(bitmap, SessionMaintainence.instance!!.Uid!!)
+//                val dialog =
+//                    BottomSheetDialog(this, R.style.AppBottomSheetDialogTheme) // Style here
+//                val view = layoutInflater.inflate(R.layout.profile_bottom_sheet_dialog, null)
+//                dialog.setContentView(view)
+//                dialog.payimages.setImageURI(imageUri)
+            }
+        }
+    }
+    private fun uploadFile(bitmap: Bitmap, userId: String) {
+        progress = ProgressDialog(activity!!)
+        progress!!.setMessage("Processing..")
+        progress!!.setCancelable(false)
+        progress!!.show()
+        val storage = FirebaseStorage.getInstance()
+        val storageRef = storage.reference.child("jobImage")
+        val mountainImagesRef = storageRef.child("images/" + userId + "jobImage" + ".jpg")
+        val baos = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 20, baos)
+        val data = baos.toByteArray()
+        val uploadTask = mountainImagesRef.putBytes(data)
+        uploadTask.addOnFailureListener {
+            progress!!.dismiss()
+            // Handle unsuccessful uploads
+        }.addOnSuccessListener { taskSnapshot ->
+            val result = taskSnapshot.metadata!!.reference!!.downloadUrl
+            result.addOnSuccessListener {
+                SessionMaintainence.instance!!.profilepic = it.toString()
+//                profilebottomsheet(SessionMaintainence.instance!!.lastName, 1)
+                ViewModel!!.insertstr(it.toString())
+
+//                Glide.with(this)
+//                    .load(SessionMaintainence.instance!!.profilepic)
+//                    .placeholder(R.drawable.gpay)
+//                    .into(dialog.payimages)
+                progress!!.dismiss()
+            }
+        }
+
+
     }
 
     private fun profilebottomsheettrent(imageUri1: Uri?) {
@@ -989,6 +1055,9 @@ class HomeFragment : Fragment() {
             }
             .addOnFailureListener {
                 try {
+                    shimmer_view_container.stopShimmerAnimation();
+
+                    shimmer_view_container.visibility = View.GONE
 //                    shimmer_view_container.stopShimmerAnimation();
 //                    shimmer_view_container.visibility = View.GONE
                     scr.visibility = View.VISIBLE
@@ -1020,10 +1089,13 @@ class HomeFragment : Fragment() {
                     val s = i.toObject(cateModel::class.java)
                     cateList.add(s!!)
                 }
-                val acceptHorizontalLayoutsss =
-                    LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-                caterec!!.layoutManager = acceptHorizontalLayoutsss
-                caterec!!.adapter = cateadapter(activity!!, cateList)
+                try {
+                    val acceptHorizontalLayoutsss =
+                        LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+                    caterec!!.layoutManager = acceptHorizontalLayoutsss
+                    caterec!!.adapter = cateadapter(activity!!, cateList)
+                } catch (e: Exception) {
+                }
                 setOffer()
             }
     }
@@ -1051,18 +1123,24 @@ class HomeFragment : Fragment() {
                     val s = i.toObject(dealModel::class.java)
                     offerList.add(s!!)
                 }
-                val acceptHorizontalLayoutsss1 =
-                    LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+                try {
+                    val acceptHorizontalLayoutsss1 =
+                        LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
 
 
 
-                offer!!.layoutManager = acceptHorizontalLayoutsss1
-                offer!!.adapter = offercardadapter(activity!!, offerList)
+                    offer!!.layoutManager = acceptHorizontalLayoutsss1
+                    offer!!.adapter = offercardadapter(activity!!, offerList)
+                } catch (e: Exception) {
+                }
                 setpop()
 //                adapterSet(dealList, kadaiFoodList)
             }
             .addOnFailureListener {
                 try {
+                    shimmer_view_container.visibility = View.GONE
+                    shimmer_view_container.stopShimmerAnimation();
+
 //                    shimmer_view_container.stopShimmerAnimation();
 //                    shimmer_view_container.visibility = View.GONE
                     scr.visibility = View.VISIBLE
@@ -1100,10 +1178,13 @@ class HomeFragment : Fragment() {
 //                    LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
 //                caterec!!.layoutManager = acceptHorizontalLayoutsss
 //                caterec!!.adapter = cateadapter(activity!!, cateList)
-                val acceptHorizontalLayoutsss11 =
-                    LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-                caterec1!!.layoutManager = acceptHorizontalLayoutsss11
-                caterec1!!.adapter = papularadapter(activity!!, popList)
+                try {
+                    val acceptHorizontalLayoutsss11 =
+                        LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+                    caterec1!!.layoutManager = acceptHorizontalLayoutsss11
+                    caterec1!!.adapter = papularadapter(activity!!, popList)
+                } catch (e: Exception) {
+                }
 //                setOffer()
                 settrend()
             }
@@ -1149,12 +1230,31 @@ class HomeFragment : Fragment() {
 //                activity!!.viewPager.adapter = pagerAdapter
 //                activity!!.viewPager.setPageTransformer(false, fragmentCardShadowTransformer)
 //                activity!!.viewPager.offscreenPageLimit = 3
-                viewPager.adapter = MovieAdapter(trendList, activity!!)
+                try {
+                    viewPager.adapter = MovieAdapter(trendList, activity!!)
+                } catch (e: Exception) {
+                }
+                try {
+                    scr.visibility = View.VISIBLE
 
+                    shimmer_view_container.visibility = View.GONE
+                    shimmer_view_container.stopShimmerAnimation();
+                } catch (e: Exception) {
+                }
+                if (SessionMaintainence.instance!!.is_loggedin) {
+                    if (SessionMaintainence.instance!!.fullname == "") {
+//                if (!check){
+                        profilebottomsheets("", 0)
+                    }
+//            }
+                }
 //                adapterSet(dealList, kadaiFoodList)
             }
             .addOnFailureListener {
                 try {
+                    shimmer_view_container.visibility = View.GONE
+                    shimmer_view_container.stopShimmerAnimation();
+
 //                    shimmer_view_container.stopShimmerAnimation();
 //                    shimmer_view_container.visibility = View.GONE
                     scr.visibility = View.VISIBLE
@@ -1164,4 +1264,61 @@ class HomeFragment : Fragment() {
 
     }
 
+    private fun profilebottomsheets(fullname: String?, i: Int) {
+        val dialog = BottomSheetDialog(activity!!, R.style.AppBottomSheetDialogTheme) // Style here
+        val view = layoutInflater.inflate(R.layout.profile_bottom_sheet_dialog, null)
+        dialog.setContentView(view)
+        dialog.dismiss()
+
+//        if (i == 1) {
+//            dialog.dismiss()
+//            dialog.show()
+//        } else if (i == 0) {
+//            dialog.dismiss()
+//            dialog.show()
+//        }
+        dialog.setCancelable(false)
+        dialog.name_edit_text.setText(SessionMaintainence.instance!!.phoneno)
+        dialog.inputs1.setText(fullname)
+        ViewModel!!.names.observe(this, androidx.lifecycle.Observer {
+            Glide.with(this)
+                .load(it)
+                .into(dialog.payimages)
+        })
+
+
+        dialog.buttonas.setOnClickListener {
+            if (dialog.inputs1.text.toString() != "") {
+                firestoreDB = FirebaseFirestore.getInstance()
+                firestoreDB!!.collection("buyer").document(SessionMaintainence.instance!!.Uid!!)
+                    .update(
+                        mapOf(
+                            "profileimage" to SessionMaintainence.instance!!.profilepic,
+                            "name" to dialog.inputs1.text.toString()
+                        )
+                    )
+                    .addOnSuccessListener {
+                        SessionMaintainence.instance!!.fullname =
+                            dialog.inputs1.text.toString()
+                        dialog.dismiss()
+                    }
+                    .addOnFailureListener {
+                        dialog.dismiss()
+                    }
+            } else {
+                dialog.inputs1.error = "Enter the name"
+            }
+        }
+        dialog.payimages.setOnClickListener {
+            SessionMaintainence.instance!!.lastName = dialog.inputs1.text.toString()
+            selectImageInAlbum(dialog)
+        }
+        dialog.show()
+    }
+    fun selectImageInAlbum(dialog: BottomSheetDialog) {
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
+        intent.addCategory(Intent.CATEGORY_OPENABLE)
+        intent.type = "image/*"
+        startActivityForResult(intent, OPEN_DOCUMENT_CODE)
+    }
 }

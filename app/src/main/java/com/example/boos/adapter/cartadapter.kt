@@ -45,6 +45,7 @@ class cartadapter(val activity: FragmentActivity, val list: MutableList<GroceryI
         val data = list[position]
         holder.itname.text = data.itemName
         holder.prices.text = data.itemQuantity
+        holder.desc.text = data.itemPrice.toString() + " ₹"
         val groceryRepository = GroceryRepository(GroceryDatabase(activity!!))
         val factory = GroceryViewModelFactory(groceryRepository)
 //        Glide.with(itemActivity)
@@ -53,50 +54,51 @@ class cartadapter(val activity: FragmentActivity, val list: MutableList<GroceryI
 //            .into(holder.itemeImg)
         // Initialised View Model
         ViewModel = ViewModelProvider(activity, factory).get(GroceryViewModel::class.java)
-        holder.butts.setOnClickListener {
-            val s = list.filter { it.ids.toString() == data.id.toString() }
-            if (s.isNotEmpty()) {
-                holder.butts.visibility = View.INVISIBLE
-                holder.numberPicker.visibility = View.VISIBLE
+//        holder.butts.setOnClickListener {
+//            val s = list.filter { it.ids.toString() == data.id.toString() }
+//            if (s.isNotEmpty()) {
+//        holder.butts.visibility = View.INVISIBLE
+//        holder.numberPicker.visibility = View.VISIBLE
 
-                ViewModel.update(s[s.lastIndex].count + 1, data.id.toString())
-                holder.numberPicker.number = (s[s.lastIndex].count + 1).toString()
-            } else {
-                holder.butts.visibility = View.INVISIBLE
-                holder.numberPicker.visibility = View.VISIBLE
-                val item = GroceryItems(
-                    data.itemName,
-                    data.itemQuantity,
-                    data.id.toString(),
-                    data.mainids,
-                    1,
-                    data.itemPrice.toInt()
-                )
-                holder.numberPicker.number = "1"
-                ViewModel.insert(item)
-            }
+//                ViewModel.update(s[s.lastIndex].count + 1, data.id.toString())
+        holder.numberPicker.number = data.count.toString()
 
-        }
+//            else {
+//                holder.butts.visibility = View.INVISIBLE
+//                holder.numberPicker.visibility = View.VISIBLE
+//                val item = GroceryItems(
+//                    data.itemName,
+//                    data.itemQuantity,
+//                    data.id.toString(),
+//                    data.mainids,
+//                    1,
+//                    data.itemPrice.toInt()
+//                )
+//                holder.numberPicker.number = "1"
+//                ViewModel.insert(item)
+//            }
+
+//        }
 
         holder.numberPicker.setOnValueChangeListener(ElegantNumberButton.OnValueChangeListener { view, oldValue, newValue ->
             Log.e("cd", (list.size).toString())
 
-            if (newValue == 0) {
-                holder.butts.visibility = View.VISIBLE
-                holder.numberPicker.visibility = View.INVISIBLE
-            }
+//            if (newValue == 0) {
+//                holder.butts.visibility = View.VISIBLE
+//                holder.numberPicker.visibility = View.INVISIBLE
+//            }
             s = newValue - oldValue
             if (s == 1) {
-                val s = list.filter { it.ids == data.id.toString() }
-                ViewModel.update(s[s.lastIndex].count + 1, data.id.toString())
+//                val s = list.filter { it.ids == data.id.toString() }
+                ViewModel.update(data.count + 1, data.ids.toString())
             } else {
-                val s = list.filter { it.ids == data.id.toString() }
-                if (s[s.lastIndex].count != 0) {
-                    ViewModel.update(s[s.lastIndex].count - 1, data.id.toString())
+//                val s = list.filter { it.ids == data.id.toString() }
+                if (data.count != 1) {
+                    ViewModel.update(data.count  - 1, data.ids.toString())
                 } else {
-                    ViewModel.deletepar(data.id.toString())
-                    holder.butts.visibility = View.VISIBLE
-                    holder.numberPicker.visibility = View.INVISIBLE
+                    ViewModel.deletepar(data.ids.toString())
+//                    holder.butts.visibility = View.VISIBLE
+//                    holder.numberPicker.visibility = View.INVISIBLE
 
                 }
             }
@@ -107,31 +109,9 @@ class cartadapter(val activity: FragmentActivity, val list: MutableList<GroceryI
         ViewModel.allGroceryItems().observe(activity, androidx.lifecycle.Observer {
             list.clear()
             list.addAll(it)
-            val sss = list.filter { it.ids == data.id.toString() }
             ViewModel.addIssuePost(it)
 
         })
-
-        ViewModel.mIssuePostLiveData.observe(activity, androidx.lifecycle.Observer {
-            val ssas = it.filter { it.ids == data.id.toString() }
-
-            if (ssas.size != 0) {
-                if (ssas.last().count == 0) {
-                    ViewModel.deletepar(data.id.toString())
-                    holder.butts.visibility = View.VISIBLE
-                    holder.numberPicker.visibility = View.INVISIBLE
-                } else {
-                    holder.butts.visibility = View.INVISIBLE
-                    holder.numberPicker.visibility = View.VISIBLE
-                    holder.numberPicker.number = ssas.last().count.toString()
-                }
-
-            } else {
-                holder.butts.visibility = View.VISIBLE
-                holder.numberPicker.visibility = View.INVISIBLE
-            }
-        })
-
 
     }
 }

@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.Kwasow:BottomNavigationCircles-Android:1.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/34c78fc7ff0869d1ecabedfb824fd3be/jetified-BottomNavigationCircles-Android-1.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/34c78fc7ff0869d1ecabedfb824fd3be/jetified-BottomNavigationCircles-Android-1.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/34c78fc7ff0869d1ecabedfb824fd3be/jetified-BottomNavigationCircles-Android-1.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/356c757498984e65e053c0d49b737f1e/jetified-BottomNavigationCircles-Android-1.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/356c757498984e65e053c0d49b737f1e/jetified-BottomNavigationCircles-Android-1.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/356c757498984e65e053c0d49b737f1e/jetified-BottomNavigationCircles-Android-1.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

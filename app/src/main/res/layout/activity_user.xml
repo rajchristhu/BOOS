@@ -21,8 +21,9 @@
             android:id="@+id/main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/rounded_dialog"
 
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/rounded_dialog"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -33,8 +34,7 @@
                 android:id="@+id/imageView"
                 android:layout_width="25dp"
                 android:layout_height="20dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/locationtext"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/locationtext"
                 app:srcCompat="@drawable/marker" />
@@ -64,14 +64,11 @@
                 android:id="@+id/locationtext"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
                 android:layout_marginEnd="24dp"
-                android:layout_marginBottom="24dp"
-                android:fontFamily="@font/open_sans_semibold"
+                android:fontFamily="@font/pt_sans_bold"
                 android:text="ponnaiyan chetti st,thiruthuraipoondi,thiruvarur"
                 android:textColor="@color/white"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/menuss"
                 app:layout_constraintStart_toEndOf="@+id/imageView"
@@ -79,13 +76,13 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/searchone"
-                android:visibility="gone"
                 android:layout_width="0dp"
                 android:layout_height="45dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="12dp"
+                android:visibility="gone"
                 app:cardCornerRadius="18dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/menuss"
@@ -133,13 +130,13 @@
                 android:id="@+id/textView13"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="24dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/open_sans_bold"
                 android:text="BOSS"
                 android:textColor="@color/white"
-                android:textSize="24sp"
-                app:layout_constraintStart_toEndOf="@+id/imageView"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -224,8 +221,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
-    <com.etebarian.meowbottomnavigation.MeowBottomNavigation
-        android:layout_width="match_parent"
+    <com.etebarian.meowbottomnavigation.MeowBottomNavigation        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/bottomNavigation"
         app:mbn_countBackgroundColor="@color/apple"
