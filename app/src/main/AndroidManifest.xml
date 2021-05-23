@@ -33,7 +33,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppThems"
         tools:replace="android:theme,android:icon">
-        <activity android:name=".activity.ShowActivity"></activity>
+        <activity android:name=".activity.DelsessionActivity"></activity>
+        <activity android:name=".activity.DeliverysProfile" />
+        <activity android:name=".activity.ShowActivity" />
         <activity
             android:name=".activity.ProActivity"
             android:screenOrientation="portrait" />

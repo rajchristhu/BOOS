@@ -24,6 +24,7 @@ import com.ckdroid.geofirequery.model.Distance
 import com.ckdroid.geofirequery.setLocation
 import com.ckdroid.geofirequery.utils.BoundingBoxUtils
 import com.denzcoskun.imageslider.constants.ScaleTypes
+import com.denzcoskun.imageslider.interfaces.ItemClickListener
 import com.denzcoskun.imageslider.models.SlideModel
 import com.example.boos.R
 import com.example.boos.Room.GroceryDatabase
@@ -56,16 +57,21 @@ class HomeFragment : Fragment() {
     private var isRevealed = false
 
     private val PICK_IMAGE = 100
+    private val TRENDEDIT = 110
+    private val OFFFEREDIT = 111
+    private val DEALED = 112
     private val PICK_IMAGEq = 101
     private val PICK_IMAGEs = 120
     private val PICK_IMAGEss = 1201
     private val PICK_IMAGEsst = 190
     private var imageUri: Uri? = null
+    private var dealimageUri: Uri? = null
     private var imageUri1: Uri? = null
     private var imageUri1q: Uri? = null
     private var imageUri1s: Uri? = null
     private var imageUri1st: Uri? = null
     var imagePath: String? = ""
+    var dealimagePath: String? = ""
     var imagePath1: String? = ""
     var imagePath1q: String? = ""
     var imagePath1s: String? = ""
@@ -79,6 +85,7 @@ class HomeFragment : Fragment() {
 
     var progress: ProgressDialog? = null
     var bitmap: Bitmap? = null
+    var dealbitmap: Bitmap? = null
     var bitmapq: Bitmap? = null
     var bitmapss: Bitmap? = null
     var bitmaps: Bitmap? = null
@@ -285,6 +292,65 @@ class HomeFragment : Fragment() {
         dialog.show()
     }
 
+
+    private fun dealedit(s: String) {
+        val dialog = BottomSheetDialog(activity!!, R.style.AppBottomSheetDialogTheme) // Style here
+        val view = layoutInflater.inflate(R.layout.adminbottom, null)
+        dialog.setContentView(view)
+        dialog.dismiss()
+        dialog.imageView6.setOnClickListener {
+            dialog.dismiss()
+
+            val checkSelfPermission =
+                ContextCompat.checkSelfPermission(
+                    activity!!,
+                    android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+                )
+            if (checkSelfPermission != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(
+                    activity!!,
+                    arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                    1
+                )
+                dialog.dismiss()
+
+            } else {
+//                openAlbum()
+                if (s == "deal") {
+                    openGallerydealedit()
+
+                } else if (s == "offer") {
+                    openGalleryssofferedit()
+
+                } else if (s == "trends") {
+                    openGalleryssttrendedit()
+                }
+            }
+        }
+        dialog.show()
+    }
+
+    private fun openGalleryssttrendedit() {
+        val gallery =
+            Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
+        startActivityForResult(gallery, TRENDEDIT)
+
+    }
+
+    private fun openGalleryssofferedit() {
+        val gallery =
+            Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
+        startActivityForResult(gallery, OFFFEREDIT)
+
+    }
+
+    private fun openGallerydealedit() {
+
+        val gallery =
+            Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
+        startActivityForResult(gallery, DEALED)
+    }
+
     private fun openGallerysst() {
 
         val gallery =
@@ -367,7 +433,14 @@ class HomeFragment : Fragment() {
                 MediaStore.Images.Media.getBitmap(activity!!.contentResolver, imageUri)
 
         }
+        if (resultCode == Activity.RESULT_OK && requestCode == DEALED) {
+            dealimageUri = data!!.data
+            dealimagePath = dealimageUri.toString()
+            dealedittwo(dealimageUri)
+            dealbitmap =
+                MediaStore.Images.Media.getBitmap(activity!!.contentResolver, dealimageUri)
 
+        }
         if (resultCode == Activity.RESULT_OK && requestCode == PICK_IMAGE) {
             imageUri1 = data!!.data
             imagePath1 = imageUri1.toString()
@@ -416,6 +489,125 @@ class HomeFragment : Fragment() {
 //                dialog.payimages.setImageURI(imageUri)
             }
         }
+    }
+
+    private fun dealedittwo(dealimageUri: Uri?) {
+
+        val dialog = BottomSheetDialog(activity!!, R.style.AppBottomSheetDialogTheme) // Style here
+        val view = layoutInflater.inflate(R.layout.adminbottom, null)
+        dialog.setContentView(view)
+        dialog.dismiss()
+        dialog.imageView6.setImageURI(dealimageUri)
+        dialog.buttonas.setOnClickListener {
+            if (dialog.name_edit_text1.text.toString()
+                    .isNullOrEmpty() && dialog.name_edit_text1w.text.toString().isNullOrEmpty()
+            ) {
+                dealeditphotouploadFile(
+                    dialog.name_edit_text1.text.toString(),
+                    dialog.name_edit_text1w.text.toString(),
+                    dialog
+                )
+            } else {
+                activity!!.toast("please enter all details")
+            }
+        }
+//
+        dialog.imageView6.setOnClickListener {
+            val checkSelfPermission =
+                ContextCompat.checkSelfPermission(
+                    activity!!,
+                    android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+                )
+            if (checkSelfPermission != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(
+                    activity!!,
+                    arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                    1
+                )
+            } else {
+//                openAlbum()
+                openGallery()
+            }
+        }
+        dialog.show()
+    }
+
+    private fun dealeditphotouploadFile(
+        name: String, key: String, dialog: BottomSheetDialog
+    ) {
+        progress = ProgressDialog(activity!!)
+        progress!!.setMessage("Processing..")
+        progress!!.setCancelable(false)
+        progress!!.show()
+        val storage = FirebaseStorage.getInstance()
+        val storageRef = storage.reference.child("kadai_item")
+        val mountainImagesRef =
+            storageRef.child(
+                "folder" + "/" + SessionMaintainence.instance!!.Uid + Timestamp.now()
+                    .toString() + ".jpg"
+            )
+        val baos = ByteArrayOutputStream()
+        bitmaps!!.compress(Bitmap.CompressFormat.JPEG, 20, baos)
+        val data = baos.toByteArray()
+        val uploadTask = mountainImagesRef.putBytes(data)
+        uploadTask.addOnFailureListener {
+            progress!!.dismiss()
+        }.addOnSuccessListener { taskSnapshot ->
+            val result = taskSnapshot.metadata!!.reference!!.downloadUrl
+            result.addOnSuccessListener {
+                imageLinks = it.toString()
+                progress!!.dismiss()
+
+                editDeal(name, key, dialog)
+//                addCate(
+//                    imageLinks,
+//                    topti,
+//                    toptitwo,
+//                    des, input4, input6
+//                )
+            }
+        }
+
+    }
+
+    private fun editDeal(name: String, key: String, dialog: BottomSheetDialog) {
+        val id = Timestamp.now().toString()
+        val model = dealModel(
+            id,
+            imageLinks,
+            key,
+            name,
+            true
+        )
+        firestoreDB = FirebaseFirestore.getInstance()
+        val doc = firestoreDB!!.collection("deal").document(id)
+        doc.set(model)
+            .addOnSuccessListener {
+//                doc.setLocation(8.1786, 77.2561, "geo")
+//                doc.setLocation(10.7656082, 79.8423888, "geo")
+//                doc.setLocation(9.35612, 77.9183, "geo")
+                //man
+//                doc.setLocation(10.6649, 79.4507, "geo")
+                //sattur
+                doc.setLocation(
+                    SessionMaintainence.instance!!.lat!!.toDouble(),
+                    SessionMaintainence.instance!!.long!!.toDouble(),
+                    "geo"
+                )
+                progress!!.dismiss()
+                dialog.dismiss()
+                val intent = activity!!.intent
+                activity!!.finish()
+                activity!!.startActivity(intent)
+//                activity!!.startActivity<DealFormActivity>("name" to name)
+//                toast("added")
+            }
+            .addOnFailureListener {
+                progress!!.dismiss()
+                dialog.dismiss()
+
+            }
+
     }
 
     private fun uploadFile(bitmap: Bitmap, userId: String) {
@@ -1058,6 +1250,15 @@ class HomeFragment : Fragment() {
                     slideModels.add(SlideModel(i.image, ""))
                 }
                 activity!!.slider.setImageList(slideModels, scaleType = ScaleTypes.CENTER_CROP)
+                if (SessionMaintainence.instance!!.userType == "admin") {
+                    activity!!.slider.setItemClickListener(object : ItemClickListener {
+                        override fun onItemSelected(position: Int) {
+                            val data = dealList[position]
+
+                        }
+                    })
+                }
+
                 caterecs()
 //                adapterSet(dealList, kadaiFoodList)
             }
@@ -1101,7 +1302,7 @@ class HomeFragment : Fragment() {
                     val acceptHorizontalLayoutsss =
                         LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
                     caterec!!.layoutManager = acceptHorizontalLayoutsss
-                    caterec!!.adapter = cateadapter(activity!!, cateList,"1")
+                    caterec!!.adapter = cateadapter(activity!!, cateList, "1")
                 } catch (e: Exception) {
                 }
                 setOffer()
@@ -1190,7 +1391,7 @@ class HomeFragment : Fragment() {
                     val acceptHorizontalLayoutsss11 =
                         LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
                     caterec1!!.layoutManager = acceptHorizontalLayoutsss11
-                    caterec1!!.adapter = papularadapter(activity!!, popList,"1")
+                    caterec1!!.adapter = papularadapter(activity!!, popList, "1")
                 } catch (e: Exception) {
                 }
 //                setOffer()
@@ -1239,15 +1440,27 @@ class HomeFragment : Fragment() {
 //                activity!!.viewPager.setPageTransformer(false, fragmentCardShadowTransformer)
 //                activity!!.viewPager.offscreenPageLimit = 3
                 if (cateList.size > 4) {
-                    textView12.visibility = View.VISIBLE
+                    try {
+                        textView12.visibility = View.VISIBLE
+                    } catch (e: Exception) {
+                    }
                 } else {
-                    textView12.visibility = View.GONE
+                    try {
+                        textView12.visibility = View.GONE
+                    } catch (e: Exception) {
+                    }
 
                 }
                 if (popList.size > 4) {
-                    textView121.visibility = View.VISIBLE
+                    try {
+                        textView121.visibility = View.VISIBLE
+                    } catch (e: Exception) {
+                    }
                 } else {
-                    textView121.visibility = View.GONE
+                    try {
+                        textView121.visibility = View.GONE
+                    } catch (e: Exception) {
+                    }
 
                 }
                 if (dealList.size == 0 && offerList.size == 0 && trendList.size == 0 && popList.size == 0 && cateList.size == 0) {
