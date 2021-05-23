@@ -218,7 +218,7 @@ open class MapActivity : AppCompatActivity(), OnMapReadyCallback,
                 SessionMaintainence.instance!!.addressverify = address
                 SessionMaintainence.instance!!.adds = true
                 if (oiu != "1") {
-                    if (opt11 == "") {
+//                    if (opt11 == "") {
                         opt1!!.text = ""
                         etPlace.setText("")
                         opt1!!.text = address
@@ -227,7 +227,7 @@ open class MapActivity : AppCompatActivity(), OnMapReadyCallback,
                             dones.visibility = View.VISIBLE
 
                         }
-                    }
+//                    }
                 }
                 else
                 {

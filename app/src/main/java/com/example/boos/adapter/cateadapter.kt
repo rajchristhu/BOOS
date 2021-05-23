@@ -14,7 +14,8 @@ import org.jetbrains.anko.startActivity
 
 class cateadapter(
     val activity: FragmentActivity,
-    val cateList: MutableList<cateModel>
+    val cateList: MutableList<cateModel>,
+    val s: String
 ) :
     RecyclerView.Adapter<cateadapter.ViewHolder>() {
 
@@ -33,20 +34,25 @@ class cateadapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val data=cateList[position]
+        val data = cateList[position]
         Glide.with(activity)
             .load(data.cateimage)
             .placeholder(R.drawable.index)
             .into(holder.payimages)
-        holder.res.text=data.catename
+        holder.res.text = data.catename
         holder.kadaiclick.setOnClickListener {
             activity!!.startActivity<ItemActivity>("id" to data.id, "img" to data.cateimage)
         }
     }
 
     override fun getItemCount(): Int {
-        return if (cateList.size >= 5) {
-            5
+        return if (cateList.size >= 4) {
+            if (s == "2") {
+                cateList.size
+            } else {
+                4
+            }
+
         } else {
             cateList.size
         }

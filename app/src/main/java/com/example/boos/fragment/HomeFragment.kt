@@ -30,6 +30,7 @@ import com.example.boos.Room.GroceryDatabase
 import com.example.boos.Room.GroceryRepository
 import com.example.boos.Room.GroceryViewModel
 import com.example.boos.Room.GroceryViewModelFactory
+import com.example.boos.activity.ShowActivity
 import com.example.boos.adapter.*
 import com.example.boos.model.cateModel
 import com.example.boos.model.dealModel
@@ -44,6 +45,7 @@ import kotlinx.android.synthetic.main.adminbottom.*
 import kotlinx.android.synthetic.main.adminbottom.buttonas
 import kotlinx.android.synthetic.main.home_fragment.*
 import kotlinx.android.synthetic.main.profile_bottom_sheet_dialog.*
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 import java.io.ByteArrayOutputStream
 
@@ -51,6 +53,8 @@ import java.io.ByteArrayOutputStream
 class HomeFragment : Fragment() {
     var imageLinkss: String = ""
     var firestoreDB: FirebaseFirestore? = null
+    private var isRevealed = false
+
     private val PICK_IMAGE = 100
     private val PICK_IMAGEq = 101
     private val PICK_IMAGEs = 120
@@ -106,8 +110,8 @@ class HomeFragment : Fragment() {
         ViewModel = ViewModelProviders.of(this, factory).get(GroceryViewModel::class.java)
 
         activity!!.bottomNavigation.show(3)
-        activity!!.locationtext.visibility=View.VISIBLE
-        activity!!.imageView.visibility=View.VISIBLE
+        activity!!.locationtext.visibility = View.VISIBLE
+        activity!!.imageView.visibility = View.VISIBLE
         activity!!.textView13.text = "BOSS"
 
         deal()
@@ -126,7 +130,9 @@ class HomeFragment : Fragment() {
             addpopular.visibility = View.VISIBLE
         }
 
-
+        textView12.setOnClickListener {
+            activity!!.startActivity<ShowActivity>("type" to "1")
+        }
         adddeal.setOnClickListener {
             profilebottomsheet("deal")
         }
@@ -400,7 +406,8 @@ class HomeFragment : Fragment() {
             if (data != null) {
                 // this is the image selected by the user
                 val imageUris = data.data
-                val bitmap = MediaStore.Images.Media.getBitmap(activity!!.contentResolver, imageUris)
+                val bitmap =
+                    MediaStore.Images.Media.getBitmap(activity!!.contentResolver, imageUris)
                 uploadFile(bitmap, SessionMaintainence.instance!!.Uid!!)
 //                val dialog =
 //                    BottomSheetDialog(this, R.style.AppBottomSheetDialogTheme) // Style here
@@ -410,6 +417,7 @@ class HomeFragment : Fragment() {
             }
         }
     }
+
     private fun uploadFile(bitmap: Bitmap, userId: String) {
         progress = ProgressDialog(activity!!)
         progress!!.setMessage("Processing..")
@@ -1093,7 +1101,7 @@ class HomeFragment : Fragment() {
                     val acceptHorizontalLayoutsss =
                         LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
                     caterec!!.layoutManager = acceptHorizontalLayoutsss
-                    caterec!!.adapter = cateadapter(activity!!, cateList)
+                    caterec!!.adapter = cateadapter(activity!!, cateList,"1")
                 } catch (e: Exception) {
                 }
                 setOffer()
@@ -1182,7 +1190,7 @@ class HomeFragment : Fragment() {
                     val acceptHorizontalLayoutsss11 =
                         LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
                     caterec1!!.layoutManager = acceptHorizontalLayoutsss11
-                    caterec1!!.adapter = papularadapter(activity!!, popList)
+                    caterec1!!.adapter = papularadapter(activity!!, popList,"1")
                 } catch (e: Exception) {
                 }
 //                setOffer()
@@ -1230,12 +1238,47 @@ class HomeFragment : Fragment() {
 //                activity!!.viewPager.adapter = pagerAdapter
 //                activity!!.viewPager.setPageTransformer(false, fragmentCardShadowTransformer)
 //                activity!!.viewPager.offscreenPageLimit = 3
+                if (cateList.size > 4) {
+                    textView12.visibility = View.VISIBLE
+                } else {
+                    textView12.visibility = View.GONE
+
+                }
+                if (popList.size > 4) {
+                    textView121.visibility = View.VISIBLE
+                } else {
+                    textView121.visibility = View.GONE
+
+                }
+                if (dealList.size == 0 && offerList.size == 0 && trendList.size == 0 && popList.size == 0 && cateList.size == 0) {
+                    try {
+                        scr.visibility = View.GONE
+//                        scre.visibility = View.GONE
+//                imageView14.visibility = View.VISIBLE
+                    } catch (e: Exception) {
+                    }
+                    try {
+                        imageView14.visibility = View.VISIBLE
+                        textView65.visibility = View.VISIBLE
+                        imageView14.setAnimation("no.json")
+
+                        imageView14.playAnimation()
+                        imageView14.loop(true)
+                    } catch (e: Exception) {
+                    }
+                } else {
+                    scr.visibility = View.VISIBLE
+                    imageView14.visibility = View.GONE
+                    textView65.visibility = View.GONE
+                }
+
                 try {
                     viewPager.adapter = MovieAdapter(trendList, activity!!)
                 } catch (e: Exception) {
                 }
+
                 try {
-                    scr.visibility = View.VISIBLE
+//                    scr.visibility = View.VISIBLE
 
                     shimmer_view_container.visibility = View.GONE
                     shimmer_view_container.stopShimmerAnimation();
@@ -1315,6 +1358,7 @@ class HomeFragment : Fragment() {
         }
         dialog.show()
     }
+
     fun selectImageInAlbum(dialog: BottomSheetDialog) {
         val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
         intent.addCategory(Intent.CATEGORY_OPENABLE)

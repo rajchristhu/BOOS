@@ -33,17 +33,40 @@
         android:supportsRtl="true"
         android:theme="@style/AppThems"
         tools:replace="android:theme,android:icon">
-        <activity android:name=".activity.ProActivity"></activity>
-        <activity android:name=".activity.ItemActivity" />
-        <activity android:name=".activity.DealFormActivity" />
-        <activity android:name=".start.OtpScreen" />
+        <activity android:name=".activity.ShowActivity"></activity>
+        <activity
+            android:name=".activity.ProActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ItemActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.DealFormActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".start.OtpScreen"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysVisible" />
         <activity android:name=".start.GetStart" />
-        <activity android:name=".start.Loginpage" />
-        <activity android:name=".start.AdminActivity" />
-        <activity android:name=".start.OwnerTabActivity" />
-        <activity android:name=".start.DeleveryBoy" />
-        <activity android:name=".activity.UserActivity" />
-        <activity android:name=".MainActivity" />
+        <activity
+            android:name=".start.Loginpage"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysVisible" />
+        <activity
+            android:name=".start.AdminActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".start.OwnerTabActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".start.DeleveryBoy"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.UserActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
         <activity android:name=".start.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

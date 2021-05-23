@@ -14,7 +14,8 @@ import org.jetbrains.anko.startActivity
 
 class papularadapter(
     val activity: FragmentActivity,
-    private val slideModels: MutableList<cateModel>
+    private val slideModels: MutableList<cateModel>,
+    val s: String
 ) :
     RecyclerView.Adapter<papularadapter.ViewHolder>() {
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -42,8 +43,13 @@ class papularadapter(
     }
 
     override fun getItemCount(): Int {
-        return if (slideModels.size >= 5) {
-            5
+        return if (slideModels.size >= 4) {
+            if (s == "2") {
+                slideModels.size
+            } else {
+                4
+            }
+
         } else {
             slideModels.size
         }

@@ -61,6 +61,7 @@ class UserActivity : AppCompatActivity() {
     val PERMISSION_ID = 42
     lateinit var mFusedLocationClient: FusedLocationProviderClient
     var from = ""
+    var ty = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -94,7 +95,11 @@ class UserActivity : AppCompatActivity() {
                 bottomNavigation.setCount(4, "0")
             }
         })
-
+        from = try {
+            intent.getStringExtra("from").toString()
+        } catch (e: Exception) {
+            ""
+        }
         ViewModel.mIssuePostLiveData.observe(this, androidx.lifecycle.Observer {
 
 
@@ -106,14 +111,30 @@ class UserActivity : AppCompatActivity() {
 
             "" -> {
                 start()
+                bottomNavigation.show(3)
             }
             "map" -> {
                 start()
             }
+            "cart" -> {
+//                start()
+                changeFragment(CartFragment(), "cart")
+                bottomNavigation.show(4)
+
+            }
             "order" -> {
 //                start()
-//                changeFragment(TrackFragment(), "track")
+                changeFragment(TrackFrag(), "track")
+                bottomNavigation.show(2)
+
             }
+            else ->{
+                start()
+
+                bottomNavigation.show(3)
+
+            }
+
         }
         locationtext.setOnClickListener {
             if (checkPermissions()) {
@@ -125,11 +146,7 @@ class UserActivity : AppCompatActivity() {
         }
 
 
-        from = try {
-            intent.getStringExtra("from").toString()
-        } catch (e: Exception) {
-            ""
-        }
+
 
 
         val bottomNavigation = bottomNavigation
@@ -154,7 +171,6 @@ class UserActivity : AppCompatActivity() {
                 else -> changeFragment(HomeFragment(), "home")
             }
         }
-        bottomNavigation.show(3)
 //        changeFragment(HomeFragment(),"home")
     }
 
@@ -579,6 +595,35 @@ class UserActivity : AppCompatActivity() {
 //        } else {
 //            requestPermissions()
 //        }
+
+    }
+    override fun onBackPressed() {
+//        super.onBackPressed()
+        try {
+            val fragmentManager = supportFragmentManager
+            val currentFragment = fragmentManager.findFragmentById(R.id.fragment2)
+            if (currentFragment!!.tag == "home") {
+                finishAffinity()
+            }
+//        else if (currentFragment.tag == "grocery") {
+////            changeFragment(CameraFragment(), "camera")
+//            changeFragment(PermissionsFragment(), "perfrag")
+//        } else if (currentFragment.tag == "profile") {
+//            changeFragment(myJob(), "summary")
+//        }
+            else {
+                if (fragmentManager.backStackEntryCount > 1) {
+                    fragmentManager.popBackStack()
+                } else {
+                    super.onBackPressed()
+                    finishAffinity()
+                }
+            }
+        } catch (e: Exception) {
+            finishAffinity()
+
+        }
+
 
     }
 

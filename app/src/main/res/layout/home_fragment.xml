@@ -51,21 +51,30 @@
         </LinearLayout>
 
     </com.facebook.shimmer.ShimmerFrameLayout>
-
     <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/image"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
+        android:id="@+id/imageView14"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
         android:visibility="gone"
-        android:layout_marginStart="3dp"
-        android:layout_marginEnd="3dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="@+id/scr"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true" />
+         />
+
+    <TextView
+        android:id="@+id/textView65"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/open_sans_semibold"
+        android:text="Service unable in your area 📍 "
+        android:textColor="@color/apple"
+        android:textSize="18sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView14" />
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scr"
         android:layout_width="match_parent"

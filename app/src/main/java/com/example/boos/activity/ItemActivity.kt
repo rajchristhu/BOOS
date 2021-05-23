@@ -27,13 +27,18 @@ import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_item.*
+import kotlinx.android.synthetic.main.activity_item.imageView3
+import kotlinx.android.synthetic.main.activity_item.imageView7
+import kotlinx.android.synthetic.main.activity_item.recyclerViews
 import kotlinx.android.synthetic.main.additem.*
 import kotlinx.android.synthetic.main.additem.buttonasd
 import kotlinx.android.synthetic.main.additem.cat_img
 import kotlinx.android.synthetic.main.additem.cat_nametxt
 import kotlinx.android.synthetic.main.additem.cat_ordertxt
 import kotlinx.android.synthetic.main.additem.cat_statustxt
+import kotlinx.android.synthetic.main.cart_fragment.*
 import kotlinx.android.synthetic.main.home_fragment.*
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 import java.io.ByteArrayOutputStream
 
@@ -66,6 +71,24 @@ class ItemActivity : AppCompatActivity() {
             list.addAll(it)
             ViewModel.addIssuePost(it)
             if (list.size != 0) {
+                itemcard.visibility = View.VISIBLE
+                if (list.size <= 1) {
+                    itemcount.text = list.size.toString() + " ITEM"
+
+                } else {
+                    itemcount.text = list.size.toString() + " ITEMS"
+
+                }
+                var price = 0
+                for (i in list) {
+                    price += i.itemPrice.toInt()*i.count
+                }
+                priceitem.text = price.toString()
+            } else {
+                itemcard.visibility = View.GONE
+            }
+
+            if (list.size != 0) {
                 textView15.visibility = View.VISIBLE
                 textView15.text = list.size.toString()
             } else {
@@ -92,6 +115,9 @@ class ItemActivity : AppCompatActivity() {
         reads()
         additem.setOnClickListener {
             addcates()
+        }
+        itemcard.setOnClickListener {
+            startActivity<UserActivity>("from" to "cart")
         }
         imageView7.setOnClickListener {
             finish()
