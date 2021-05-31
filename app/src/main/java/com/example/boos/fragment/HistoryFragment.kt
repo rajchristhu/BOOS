@@ -83,14 +83,20 @@ class HistoryFragment : Fragment() {
                     } catch (e: Exception) {
                     }
                 } else {
-                    imageView14.visibility = View.GONE
-                    orderrec.visibility = View.VISIBLE
-                    textView58.visibility = View.VISIBLE
+                    try {
+                        imageView14.visibility = View.GONE
+                        orderrec.visibility = View.VISIBLE
+                        textView58.visibility = View.VISIBLE
+                    } catch (e: Exception) {
+                    }
                 }
                 count = monthList.size.toString()
-                orderco.text = count
-                orderrec.layoutManager = LinearLayoutManager(context)
-                orderrec.adapter = orderAdapter(monthList as MutableList<orederModel>, context!!)
+                try {
+                    orderco.text = count
+                    orderrec.layoutManager = LinearLayoutManager(context)
+                    orderrec.adapter = orderAdapter(monthList as MutableList<orederModel>, context!!)
+                } catch (e: Exception) {
+                }
             }
             .addOnFailureListener {
 

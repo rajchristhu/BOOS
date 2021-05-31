@@ -1,9 +1,18 @@
 package com.example.boos.adapter
 
+import android.app.Activity
+import android.app.ProgressDialog
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.net.Uri
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
@@ -11,7 +20,15 @@ import com.bumptech.glide.Glide
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
 import com.example.boos.R
 import com.example.boos.Room.*
+import com.example.boos.fragment.HomeFragment
+import com.example.boos.utili.SessionMaintainence
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.firebase.Timestamp
+import com.google.firebase.storage.FirebaseStorage
+import kotlinx.android.synthetic.main.addca.*
 import kotlinx.android.synthetic.main.restitemadapt.view.*
+import org.jetbrains.anko.toast
+import java.io.ByteArrayOutputStream
 
 class cartadapter(val activity: FragmentActivity, val list: MutableList<GroceryItems>) :
     RecyclerView.Adapter<cartadapter.ViewHolder>() {
@@ -20,6 +37,12 @@ class cartadapter(val activity: FragmentActivity, val list: MutableList<GroceryI
             LayoutInflater.from(parent.context).inflate(R.layout.restitemadapt, parent, false)
         return ViewHolder(itemView)
     }
+    private val PICK_IMAGE = 100
+    private var imageUri1: Uri? = null
+    var imagePath1: String? = ""
+    var bitmap: Bitmap? = null
+    var progress: ProgressDialog? = null
+    var imageLinkss: String = ""
 
     lateinit var ViewModel: GroceryViewModel
 
@@ -114,4 +137,5 @@ class cartadapter(val activity: FragmentActivity, val list: MutableList<GroceryI
         })
 
     }
+
 }

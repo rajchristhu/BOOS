@@ -1,41 +1,41 @@
 {
   "project_info": {
-    "project_number": "973752724880",
-    "project_id": "bosss-d1ebd",
-    "storage_bucket": "bosss-d1ebd.appspot.com"
+    "project_number": "995276941140",
+    "project_id": "best-online-shopping-a5350",
+    "storage_bucket": "best-online-shopping-a5350.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:973752724880:android:59aee84d1eb6c6bddcd715",
+        "mobilesdk_app_id": "1:995276941140:android:5bceafa54669f49e338ac1",
         "android_client_info": {
-          "package_name": "com.example.boos"
+          "package_name": "com.ceseagod.boos"
         }
       },
       "oauth_client": [
         {
-          "client_id": "973752724880-tfvetvmfrv1ekuvapnsqkrsrl40qm5o1.apps.googleusercontent.com",
+          "client_id": "995276941140-tilpjto2ij3s7nme9isf8b7brrc9u617.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.boos",
+            "package_name": "com.ceseagod.boos",
             "certificate_hash": "1e182a502999da1b87b6198e5984d9c9677eb295"
           }
         },
         {
-          "client_id": "973752724880-d720a7gl0s6sbkemsccsomi1817tv22m.apps.googleusercontent.com",
+          "client_id": "995276941140-qmro72377hnch2uuqab0m1ubjjb15vsl.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBU8mEsKmWrAS4eP4BkCHJANHsEg7vzDDQ"
+          "current_key": "AIzaSyC9LLuAWK70tD3-Hngo12ckeYFmi6W0-48"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "973752724880-d720a7gl0s6sbkemsccsomi1817tv22m.apps.googleusercontent.com",
+              "client_id": "995276941140-qmro72377hnch2uuqab0m1ubjjb15vsl.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

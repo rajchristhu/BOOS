@@ -46,8 +46,10 @@ import kotlinx.android.synthetic.main.adminbottom.*
 import kotlinx.android.synthetic.main.adminbottom.buttonas
 import kotlinx.android.synthetic.main.home_fragment.*
 import kotlinx.android.synthetic.main.profile_bottom_sheet_dialog.*
+import org.jetbrains.anko.alert
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
+import org.jetbrains.anko.yesButton
 import java.io.ByteArrayOutputStream
 
 
@@ -1249,12 +1251,32 @@ class HomeFragment : Fragment() {
                 for (i in dealList) {
                     slideModels.add(SlideModel(i.image, ""))
                 }
-                activity!!.slider.setImageList(slideModels, scaleType = ScaleTypes.CENTER_CROP)
+                try {
+                    activity!!.slider.setImageList(slideModels, scaleType = ScaleTypes.CENTER_CROP)
+                } catch (e: Exception) {
+                }
                 if (SessionMaintainence.instance!!.userType == "admin") {
                     activity!!.slider.setItemClickListener(object : ItemClickListener {
                         override fun onItemSelected(position: Int) {
                             val data = dealList[position]
-
+                            activity!!.alert(
+                                " Name:" + data.key,
+                                "Are you sure delete this Name?"
+                            ) {
+                                yesButton {
+                                    firestoreDB = FirebaseFirestore.getInstance()
+                                    firestoreDB!!.collection("deal").document(data.id)
+                                        .delete()
+                                        .addOnSuccessListener {
+                                            activity!!.toast("deleted successfully")
+                                            activity!!.finish();
+                                            activity!!.startActivity(activity!!.getIntent());
+                                        }
+                                        .addOnFailureListener {
+                                            activity!!.toast("Failed")
+                                        }
+                                }
+                            }.show()
                         }
                     })
                 }
@@ -1464,25 +1486,44 @@ class HomeFragment : Fragment() {
 
                 }
                 if (dealList.size == 0 && offerList.size == 0 && trendList.size == 0 && popList.size == 0 && cateList.size == 0) {
-                    try {
-                        scr.visibility = View.GONE
+
+                    if (SessionMaintainence.instance!!.userType == "admin") {
+                        try {
+                            scr.visibility = View.VISIBLE
+                            imageView14.visibility = View.GONE
+                            textView65.visibility = View.GONE
+                            adddeal.visibility = View.VISIBLE
+                            addoffer.visibility = View.VISIBLE
+                            addtrends.visibility = View.VISIBLE
+                            addcate.visibility = View.VISIBLE
+                            addpopular.visibility = View.VISIBLE
+                        } catch (e: Exception) {
+                        }
+                    }
+                    else {
+                        try {
+                            scr.visibility = View.GONE
 //                        scre.visibility = View.GONE
 //                imageView14.visibility = View.VISIBLE
-                    } catch (e: Exception) {
-                    }
-                    try {
-                        imageView14.visibility = View.VISIBLE
-                        textView65.visibility = View.VISIBLE
-                        imageView14.setAnimation("no.json")
+                        } catch (e: Exception) {
+                        }
+                        try {
+                            imageView14.visibility = View.VISIBLE
+                            textView65.visibility = View.VISIBLE
+                            imageView14.setAnimation("no.json")
 
-                        imageView14.playAnimation()
-                        imageView14.loop(true)
-                    } catch (e: Exception) {
+                            imageView14.playAnimation()
+                            imageView14.loop(true)
+                        } catch (e: Exception) {
+                        }
                     }
                 } else {
-                    scr.visibility = View.VISIBLE
-                    imageView14.visibility = View.GONE
-                    textView65.visibility = View.GONE
+                    try {
+                        scr.visibility = View.VISIBLE
+                        imageView14.visibility = View.GONE
+                        textView65.visibility = View.GONE
+                    } catch (e: Exception) {
+                    }
                 }
 
                 try {

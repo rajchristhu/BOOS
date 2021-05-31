@@ -621,7 +621,6 @@ class UserActivity : AppCompatActivity() {
             }
         } catch (e: Exception) {
             finishAffinity()
-
         }
 
 
